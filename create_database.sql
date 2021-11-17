@@ -33,8 +33,9 @@ CREATE TABLE Playlists (
 );
 
 CREATE TABLE Followers (
-    f_key INT PRIMARY KEY,
-    f_userkey INT NOT NULL
+    f_key INT,
+    f_userkey INT NOT NULL,
+    PRIMARY KEY (f_key, f_userkey)
 );
 
 CREATE TABLE Users (
