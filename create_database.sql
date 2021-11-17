@@ -26,10 +26,11 @@ CREATE TABLE Albums (
 );
 
 CREATE TABLE Playlists (
-    p_key INT PRIMARY KEY,
-    p_userkey INT NOT NULL,
-    p_songkey INT NOT NULL,
-    p_public INT NOT NULL
+    p_key INT,
+    p_userkey INT,
+    p_songkey INT,
+    p_public INT NOT NULL,
+    PRIMARY KEY (p_key, p_userkey, p_songkey)
 );
 
 CREATE TABLE Followers (
