@@ -186,34 +186,78 @@ values('10', 'TimCook', 'Apple');
 
 
 INSERT INTO Followers
-values('1', '1');
+values('1', '2');
 
 INSERT INTO Followers
-values('2', '2');
+values('1', '10');
 
 INSERT INTO Followers
-values('3', '3');
+values('1', '6');
 
 INSERT INTO Followers
-values('4', '4');
+values('2', '1');
 
 INSERT INTO Followers
-values('5', '5');
+values('2', '10');
 
 INSERT INTO Followers
-values('6', '6');
+values('2', '8');
 
 INSERT INTO Followers
-values('7', '7');
+values('2', '6');
 
 INSERT INTO Followers
-values('8', '8');
+values('3', '4');
 
 INSERT INTO Followers
-values('9', '9');
+values('3', '1');
 
 INSERT INTO Followers
-values('10', '10');
+values('3', '6');
+
+INSERT INTO Followers
+values('4', '1');
+
+INSERT INTO Followers
+values('4', '3');
+
+INSERT INTO Followers
+values('4', '6');
+
+INSERT INTO Followers
+values('4', '8');
+
+INSERT INTO Followers
+values('5', '7');
+
+INSERT INTO Followers
+values('6', '1');
+
+INSERT INTO Followers
+values('6', '4');
+
+INSERT INTO Followers
+values('7', '2');
+
+INSERT INTO Followers
+values('7', '5');
+
+INSERT INTO Followers
+values('8', '2');
+
+INSERT INTO Followers
+values('8', '3');
+
+INSERT INTO Followers
+values('8', '4');
+
+INSERT INTO Followers
+values('9', '5');
+
+INSERT INTO Followers
+values('10', '1');
+
+
 
 
 
