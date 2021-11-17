@@ -153,12 +153,6 @@ values('12', 'Beach House');
 
 
 
-CREATE TABLE Users (
-    u_key INT PRIMARY KEY,
-    u_username VARCHAR(30) NOT NULL,
-    u_password VARCHAR(100) NOT NULL
-);
-
 INSERT INTO Users
 values('1', 'RyanS', 'ILML');
 
@@ -190,13 +184,6 @@ INSERT INTO Users
 values('10', 'TimCook', 'Apple');
 
 
-
-CREATE TABLE Playlists (
-    p_key INT PRIMARY KEY,
-    p_userkey INT NOT NULL,
-    p_songkey INT NOT NULL,
-    p_public INT NOT NULL
-);
 
 INSERT INTO Playlists
 values('1', '1', '1', '0');
