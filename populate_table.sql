@@ -185,6 +185,38 @@ values('10', 'TimCook', 'Apple');
 
 
 
+INSERT INTO Followers
+values('1', '1');
+
+INSERT INTO Followers
+values('2', '2');
+
+INSERT INTO Followers
+values('3', '3');
+
+INSERT INTO Followers
+values('4', '4');
+
+INSERT INTO Followers
+values('5', '5');
+
+INSERT INTO Followers
+values('6', '6');
+
+INSERT INTO Followers
+values('7', '7');
+
+INSERT INTO Followers
+values('8', '8');
+
+INSERT INTO Followers
+values('9', '9');
+
+INSERT INTO Followers
+values('10', '10');
+
+
+
 INSERT INTO Playlists
 values('1', '1', '1', '0');
 
