@@ -143,7 +143,7 @@ INSERT INTO Artists
 values('9', 'Jason Aldean');
 
 INSERT INTO Artists
-values('10'. 'BTS');
+values('10', 'BTS');
 
 INSERT INTO Artists
 values('11', 'Bon Jovi');
@@ -214,5 +214,3 @@ values('9', '9', '10', '0');
 
 INSERT INTO Playlists
 values('10', '10', '9', '1');
-
-
