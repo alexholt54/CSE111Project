@@ -360,37 +360,37 @@ VALUES (7, 9);
 
 
 INSERT INTO Playlists (p_userkey, p_name, p_public)
-VALUES(1, "Vibezz", 0);
+VALUES(1, 'Vibezz', 0);
 
 INSERT INTO Playlists (p_userkey, p_name, p_public)
-VALUES(1, "Music", 0);
+VALUES(1, 'Music', 0);
 
 INSERT INTO Playlists (p_userkey, p_name, p_public)
-VALUES(2, "Heat", 1);
+VALUES(2, 'Heat', 1);
 
 INSERT INTO Playlists (p_userkey, p_name, p_public)
-VALUES(3, "Chillin", 1);
+VALUES(3, 'Chillin', 1);
 
 INSERT INTO Playlists (p_userkey, p_name, p_public)
-VALUES(4, "Only Bangerz", 1);
+VALUES(4, 'Only Bangerz', 1);
 
 INSERT INTO Playlists (p_userkey, p_name, p_public)
-VALUES(5, "My Playlist", 1);
+VALUES(5, 'My Playlist', 1);
 
 INSERT INTO Playlists (p_userkey, p_name, p_public)
-VALUES(6, "Feelz", 0);
+VALUES(6, 'Feelz', 0);
 
 INSERT INTO Playlists (p_userkey, p_name, p_public)
-VALUES(7, "Down Atrocious", 0);
+VALUES(7, 'Down Atrocious', 0);
 
 INSERT INTO Playlists (p_userkey, p_name, p_public)
-VALUES(8, "Top Hits", 1);
+VALUES(8, 'Top Hits', 1);
 
 INSERT INTO Playlists (p_userkey, p_name, p_public)
-VALUES(9, "Lofi", 0);
+VALUES(9, 'Lofi', 0);
 
 INSERT INTO Playlists (p_userkey, p_name, p_public)
-VALUES(10, "Slaps", 1);
+VALUES(10, 'Slaps', 1);
 
 INSERT INTO PlaylistsSongs
 VALUES(1, 1);
@@ -432,17 +432,17 @@ DELETE FROM PlaylistsSongs
 WHERE ps_pkey in (SELECT p_key FROM Users, Playlists WHERE u_key = p_userkey AND u_username = "RyanS");
 
 DELETE FROM Playlists
-WHERE p_userkey = (SELECT u_key FROM Users WHERE u_username = "RyanS");
+WHERE p_userkey = (SELECT u_key FROM Users WHERE u_username = 'RyanS');
 
 DELETE FROM Followers
-WHERE f_key = (SELECT u_key FROM Users WHERE u_username = "RyanS")
-OR f_userkey = (SELECT u_key FROM Users WHERE u_ussername = "RyanS");
+WHERE f_key = (SELECT u_key FROM Users WHERE u_username = 'RyanS')
+OR f_userkey = (SELECT u_key FROM Users WHERE u_ussername = 'RyanS');
 
 DELETE FROM FollowersArtists
-WHERE fa_key = (SELECT u_key FROM Users WHERE u_username = "RyanS");
+WHERE fa_key = (SELECT u_key FROM Users WHERE u_username = 'RyanS');
 
 DELETE FROM Users
-WHERE u_username = "RyanS";
+WHERE u_username = 'RyanS';
 
 
 
@@ -458,15 +458,15 @@ WHERE u_username = 'RyanS'
 insert into Followers
 select user1.u_key, user2.u_key
 from Users user1, Users user2
-where user1.u_username = "Immortal"
-    and user2.u_username = "TimCook";
+where user1.u_username = 'Immortal'
+    and user2.u_username = 'TimCook';
 
 
 
 -- User AlexH unfollows TheLad
 delete from Followers
-where f_key = (select u_key from Users where u_username = "AlexH")
-    and f_userkey = (select u_key from Users where u_username = "TheLad");
+where f_key = (select u_key from Users where u_username = 'AlexH')
+    and f_userkey = (select u_key from Users where u_username = 'TheLad');
 
 
 
@@ -474,23 +474,23 @@ where f_key = (select u_key from Users where u_username = "AlexH")
 insert into FollowersArtists
 select u_key, ar_key
 from users, Artists
-where u_username = "Muska"
-    and ar_name = "Bon Jovi";
+where u_username = 'Muska'
+    and ar_name = 'Bon Jovi';
 
 
 
 -- User Muska unfollows Travis Scott
 delete from FollowersArtists
-where fa_key = (select u_key from Users where u_username = "Muska")
-    and fa_artistkey = (select ar_key from Artists where ar_name = "Travis Scott");
+where fa_key = (select u_key from Users where u_username = 'Muska')
+    and fa_artistkey = (select ar_key from Artists where ar_name = 'Travis Scott');
 
 
 
 -- User MasterChief creates public Halo playlist
 insert into Playlists (p_userkey, p_name, p_public)
-select u_key, "Halo", 1
+select u_key, 'Halo', 1
 from Users
-where u_username = "MasterChief";
+where u_username = 'MasterChief';
 
 
 
@@ -498,8 +498,8 @@ where u_username = "MasterChief";
 insert into PlaylistsSongs
 select p_key, s_key
 from Songs, Playlists
-    where p_name = "Halo"
-    and s_name = "Lose Yourself";
+    where p_name = 'Halo'
+    and s_name = 'Lose Yourself';
 
 
 
@@ -507,16 +507,16 @@ from Songs, Playlists
 delete from PlaylistsSongs
 select p_key, s_key
 from Songs, Playlists
-    where s_name = "Bangarang"
-    and p_name = "Lofi";
+    where s_name = 'Bangarang'
+    and p_name = 'Lofi';
 
 
 
 -- Deleting Lofi playlist
 delete from PlaylistsSongs
-where ps_pkey = (select p_key from Playlists where p_name = "Lofi");
+where ps_pkey = (select p_key from Playlists where p_name = 'Lofi');
 delete from Playlists
-where p_name = "Lofi";
+where p_name = 'Lofi';
 
 
 
@@ -525,7 +525,7 @@ select followers.u_username
 from Users followers, Users account, Followers
 where followers.u_key = Followers.f_key
     and account.u_key = Followers.f_userkey
-    and account.u_username = "Santosh";
+    and account.u_username = 'Santosh';
 
 
 
@@ -534,7 +534,7 @@ select ar_name
 from Users, FollowersArtists, Artists
 where u_key = fa_key
     and fa_artistkey = ar_key
-    and u_username = "JackBoy";
+    and u_username = 'JackBoy';
 
 
 
@@ -542,8 +542,26 @@ where u_key = fa_key
 insert into PlaylistsSongs
 select p_key, s_key
 from Playlists, Songs, Genres
-where p_name = "Only Bangerz"
+where p_name = 'Only Bangerz'
     and s_genrekey = g_key
-    and g_name = "HipHop";
+    and g_name = 'HipHop';
 
--- Adding all songs by 
+
+
+-- Adding all songs by "The Weeknd" to "Feelz" playlist
+insert into PlaylistsSongs
+select p_key, s_key
+from Playlists, Songs, Artists
+where p_name = 'Feelz'
+    and s_artistkey = ar_key
+    and ar_name = 'The Weeknd';
+
+
+
+-- Adding all songs from album "1989" into "Down Atrocious" playlist
+insert into PlaylistsSongs
+select p_key, s_key
+from Playlists, Songs, Albums
+where p_name = 'Down Atrocious'
+    and s_albumkey = al_key
+    and al_name = '1989';
