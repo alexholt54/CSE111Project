@@ -454,7 +454,7 @@ WHERE u_username = 'RyanS'
 
 
 
--- User "Immortal" follows "TimCook"
+-- User "Immortal" follows User "TimCook"
 insert into Followers
 select user1.u_key, user2.u_key
 from Users user1, Users user2
@@ -463,14 +463,14 @@ where user1.u_username = 'Immortal'
 
 
 
--- User "AlexH" unfollows "TheLad"
+-- User "AlexH" unfollows User "TheLad"
 delete from Followers
 where f_key = (select u_key from Users where u_username = 'AlexH')
     and f_userkey = (select u_key from Users where u_username = 'TheLad');
 
 
 
--- User "Muska" follows "Bon Jovi"
+-- User "Muska" follows Artist "Bon Jovi"
 insert into FollowersArtists
 select u_key, ar_key
 from users, Artists
@@ -479,10 +479,10 @@ where u_username = 'Muska'
 
 
 
--- User "Muska" unfollows "Travis Scott"
+-- User "Muska" unfollows "Eminem"
 delete from FollowersArtists
 where fa_key = (select u_key from Users where u_username = 'Muska')
-    and fa_artistkey = (select ar_key from Artists where ar_name = 'Travis Scott');
+    and fa_artistkey = (select ar_key from Artists where ar_name = 'Eminem');
 
 
 
