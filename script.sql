@@ -535,6 +535,7 @@ from Users followers, Users account, Followers
 where followers.u_key = Followers.f_key
     and account.u_key = Followers.f_userkey
     and followers.u_username = 'Santosh';
+    
 
 
 -- Getting all of User "JackBoy's" followed artists
