@@ -600,7 +600,9 @@ from Playlists, Users
 where u_key = p_userkey
     and u_username = "RyanS";
 
---Get all the songs from a playlist 
+
+
+-- Get all the songs from a playlist 
 select s_name
 from Songs, Playlists, PlaylistsSongs
 where p_name = 'Heat'
@@ -608,3 +610,10 @@ where p_name = 'Heat'
     and ps_skey = s_key;
 
 
+
+-- See most popular songs
+select s_name
+from Songs, PlaylistsSongs
+where s_key = ps_skey
+group by s_key
+order by count(*) desc;
