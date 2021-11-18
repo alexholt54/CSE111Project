@@ -584,13 +584,13 @@ where p_name = 'Down Atrocious'
 
 
 
--- Copy all songs from "Top Hits" playlist into "Slaps" playlist
+-- Copy all songs from "Vibezz" playlist into "Slaps" playlist
 insert into PlaylistsSongs
 select new.p_key, ps_skey
 from Playlists new, PlaylistsSongs, Playlists copying
 where new.p_name = 'Slaps'
     and copying.p_key = ps_pkey
-    and copying.p_name = "Top Hits";
+    and copying.p_name = "Vibezz";
 
 
 
@@ -605,7 +605,7 @@ where u_key = p_userkey
 -- Get all the songs from a playlist 
 select s_name
 from Songs, Playlists, PlaylistsSongs
-where p_name = 'Heat'
+where p_name = 'Vibezz'
     and ps_pkey = p_key
     and ps_skey = s_key;
 
