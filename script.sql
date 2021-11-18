@@ -505,10 +505,8 @@ from Songs, Playlists
 
 -- Removing "Bangarang" from "Lofi" playlist
 delete from PlaylistsSongs
-select p_key, s_key
-from Songs, Playlists
-    where s_name = 'Bangarang'
-    and p_name = 'Lofi';
+where ps_pkey = (select p_key from Playlists where p_name = 'Lofi')
+    and ps_skey = (select s_key from Songs where s_name = 'Bangarang');
 
 
 
@@ -559,8 +557,8 @@ where p_name = 'Only Bangerz'
 
 -- Removing all songs with "Country" genre from "Vibezz"
 delete from PlaylistsSongs
-where p_key = (select p_key from Playlists where p_name = "Vibezz")
-    and s_key in (select s_key from Songs, Genres where s_genrekey = g_key and g_name = "Country")
+where ps_pkey = (select p_key from Playlists where p_name = "Vibezz")
+    and ps_skey in (select s_key from Songs, Genres where s_genrekey = g_key and g_name = "Country")
 
 
 
@@ -605,7 +603,7 @@ where u_key = p_userkey
 -- Get all the songs from a playlist 
 select s_name
 from Songs, Playlists, PlaylistsSongs
-where p_name = 'Vibezz'
+where p_name = 'Feelz'
     and ps_pkey = p_key
     and ps_skey = s_key;
 
