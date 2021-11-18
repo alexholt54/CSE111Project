@@ -427,7 +427,7 @@ VALUES('test_name', 'test_password');
 
 
 
--- Delete user RyanS
+-- Delete user "RyanS"
 DELETE FROM PlaylistsSongs
 WHERE ps_pkey in (SELECT p_key FROM Users, Playlists WHERE u_key = p_userkey AND u_username = "RyanS");
 
@@ -454,7 +454,7 @@ WHERE u_username = 'RyanS'
 
 
 
--- User Immortal follows TimCook
+-- User "Immortal" follows "TimCook"
 insert into Followers
 select user1.u_key, user2.u_key
 from Users user1, Users user2
@@ -463,14 +463,14 @@ where user1.u_username = 'Immortal'
 
 
 
--- User AlexH unfollows TheLad
+-- User "AlexH" unfollows "TheLad"
 delete from Followers
 where f_key = (select u_key from Users where u_username = 'AlexH')
     and f_userkey = (select u_key from Users where u_username = 'TheLad');
 
 
 
--- User Muska follows Bon Jovi
+-- User "Muska" follows "Bon Jovi"
 insert into FollowersArtists
 select u_key, ar_key
 from users, Artists
@@ -479,14 +479,14 @@ where u_username = 'Muska'
 
 
 
--- User Muska unfollows Travis Scott
+-- User "Muska" unfollows "Travis Scott"
 delete from FollowersArtists
 where fa_key = (select u_key from Users where u_username = 'Muska')
     and fa_artistkey = (select ar_key from Artists where ar_name = 'Travis Scott');
 
 
 
--- User MasterChief creates public Halo playlist
+-- User "MasterChief" creates public "Halo" playlist
 insert into Playlists (p_userkey, p_name, p_public)
 select u_key, 'Halo', 1
 from Users
@@ -494,7 +494,7 @@ where u_username = 'MasterChief';
 
 
 
--- Adding "Lose Yourself" to Halo playlist
+-- Adding "Lose Yourself" to "Halo" playlist
 insert into PlaylistsSongs
 select p_key, s_key
 from Songs, Playlists
@@ -503,7 +503,7 @@ from Songs, Playlists
 
 
 
--- Removing "Bangarang" from Lofi playlist
+-- Removing "Bangarang" from "Lofi" playlist
 delete from PlaylistsSongs
 select p_key, s_key
 from Songs, Playlists
@@ -512,7 +512,7 @@ from Songs, Playlists
 
 
 
--- Deleting Lofi playlist
+-- Deleting "Lofi" playlist
 delete from PlaylistsSongs
 where ps_pkey = (select p_key from Playlists where p_name = 'Lofi');
 delete from Playlists
@@ -520,7 +520,7 @@ where p_name = 'Lofi';
 
 
 
--- Getting all of User Santosh's followers
+-- Getting all of User "Santosh's" followers
 select followers.u_username
 from Users followers, Users account, Followers
 where followers.u_key = Followers.f_key
@@ -529,7 +529,7 @@ where followers.u_key = Followers.f_key
 
 
 
--- Getting all of User JackBoy's followed artists
+-- Getting all of User "JackBoy's" followed artists
 select ar_name
 from Users, FollowersArtists, Artists
 where u_key = fa_key
@@ -565,3 +565,13 @@ from Playlists, Songs, Albums
 where p_name = 'Down Atrocious'
     and s_albumkey = al_key
     and al_name = '1989';
+
+
+
+-- Copy all songs from "Top Hits" playlist into "Slaps" playlist
+insert into PlaylistsSongs
+select new.p_key, ps_skey
+from Playlists new, PlaylistsSongs, Playlists copying
+where new.p_name = 'Slaps'
+    and copying.p_key = ps_pkey
+    and copying.p_name = "Top Hits"
