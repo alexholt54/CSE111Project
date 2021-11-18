@@ -459,7 +459,7 @@ insert into Followers
 select user1.u_key, user2.u_key
 from Users user1, Users user2
 where user1.u_username = "AlexH"
-    and user2.u_username = "TheLad";
+    and user2.u_username = "TimCook";
 
 
 
@@ -470,19 +470,19 @@ where f_key = (select u_key from Users where u_username = "AlexH")
 
 
 
--- User Muska follows Travis Scott
+-- User Muska follows Bon Jovi
 insert into FollowersArtists
 select u_key, ar_key
 from users, Artists
 where u_username = "Muska"
-    and ar_name = "Travis Scott"
+    and ar_name = "Bon Jovi";
 
 
 
 -- User Muska unfollows Travis Scott
 delete from FollowersArtists
 where fa_key = (select u_key from Users where u_username = "Muska")
-    and fa_artistkey = (select ar_key from Artists where ar_name = "Travis Scott")
+    and fa_artistkey = (select ar_key from Artists where ar_name = "Travis Scott");
 
 
 
@@ -490,4 +490,44 @@ where fa_key = (select u_key from Users where u_username = "Muska")
 insert into Playlists (p_userkey, p_name, p_public)
 select u_key, "Halo", 1
 from Users
-where u_username = "MasterChief"
+where u_username = "MasterChief";
+
+
+
+-- Adding "Lose Yourself" to Halo playlist
+insert into PlaylistsSongs
+select p_key, s_key
+from Songs, Playlists
+    where p_name = "Halo"
+    and s_name = "Lose Yourself";
+
+
+
+-- Removing "Bangarang" from Lofi playlist
+delete from PlaylistsSongs
+select p_key, s_key
+from Songs, Playlists
+    where s_name = "Bangarang"
+    and p_name = "Lofi";
+
+
+
+-- Deleting Lofi playlist
+delete from PlaylistsSongs
+where ps_pkey = (select p_key from Playlists where p_name = "Lofi");
+delete from Playlists
+where p_name = "Lofi";
+
+-- Getting all of User Santosh's followers
+select followers.u_username
+from Users followers, Users account, Followers
+where followers.u_key = Followers.f_key
+    and account.u_key = Followers.f_userkey
+    and account.u_username = "Santosh";
+
+-- Getting all of User JackBoy's followed artists
+select ar_name
+from Users, FollowersArtists, Artists
+where u_key = fa_key
+    and fa_artistkey = ar_key
+    and u_username = "JackBoy";
