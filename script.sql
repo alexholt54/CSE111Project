@@ -610,8 +610,15 @@ where p_name = 'Only Bangerz'
 
 
 -- See most popular songs
-select s_name
+select s_name, count(*) as TimesAdded
 from Songs, PlaylistsSongs
 where s_key = ps_skey
 group by s_key
-order by count(*) desc;
+order by TimesAdded desc;
+
+-- See most popular artists
+select ar_name, count(*) as followers
+from Artists, FollowersArtists
+where ar_key = fa_artistkey
+group by ar_key
+order by followers desc;
