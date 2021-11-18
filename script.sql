@@ -436,7 +436,7 @@ WHERE p_userkey = (SELECT u_key FROM Users WHERE u_username = 'RyanS');
 
 DELETE FROM Followers
 WHERE f_key = (SELECT u_key FROM Users WHERE u_username = 'RyanS')
-OR f_userkey = (SELECT u_key FROM Users WHERE u_ussername = 'RyanS');
+OR f_userkey = (SELECT u_key FROM Users WHERE u_username = 'RyanS');
 
 DELETE FROM FollowersArtists
 WHERE fa_key = (SELECT u_key FROM Users WHERE u_username = 'RyanS');
