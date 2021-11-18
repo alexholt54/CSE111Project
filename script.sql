@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS Followers;
 DROP TABLE IF EXISTS FollowersArtists;
 DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Artists;
+DROP TABLE IF EXISTS PlaylistsSongs;
 
 -- Create tables
 CREATE TABLE Genres (
@@ -29,11 +30,16 @@ CREATE TABLE Albums (
 );
 
 CREATE TABLE Playlists (
-    p_key INT,
-    p_userkey INT,
-    p_songkey INT,
-    p_public INT NOT NULL,
-    PRIMARY KEY (p_key, p_userkey, p_songkey)
+    p_key INTEGER PRIMARY KEY,
+    p_userkey INT NOT NULL,
+    p_name VARCHAR(50) NOT NULL,
+    p_public INT NOT NULL
+);
+
+CREATE TABLE PlaylistsSongs (
+    ps_pkey INT,
+    ps_skey INT,
+    PRIMARY KEY (ps_pkey, ps_skey)
 );
 
 CREATE TABLE Followers (
@@ -43,9 +49,9 @@ CREATE TABLE Followers (
 );
 
 CREATE TABLE FollowersArtists (
-    f_key INT,
-    f_artistkey INT,
-    PRIMARY KEY (f_key, f_artistkey)
+    fa_key INT,
+    fa_artistkey INT,
+    PRIMARY KEY (fa_key, fa_artistkey)
 );
 
 CREATE TABLE Users (
@@ -93,87 +99,87 @@ values('Indie');
 
 
 INSERT INTO Songs (s_name,s_albumkey,s_genrekey,s_artistkey)
-values('Lose Yourself', '1', '1', '1');
+values('Lose Yourself', 1, 1, 1);
 
 INSERT INTO Songs (s_name,s_albumkey,s_genrekey,s_artistkey)
-values('Like Toy Soliders', '1', '1', '1');
+values('Like Toy Soliders', 1, 1, 1);
 
 INSERT INTO Songs (s_name,s_albumkey,s_genrekey,s_artistkey)
-values('Sicko Mode', '2', '1', '2');
+values('Sicko Mode', 2, 1, 2);
 
 INSERT INTO Songs (s_name,s_albumkey,s_genrekey,s_artistkey)
-values('Back in Black', '3', '6', '3');
+values('Back in Black', 3, 6, 3);
 
 INSERT INTO Songs (s_name,s_albumkey,s_genrekey,s_artistkey)
-values('Pink + White', '4', '3', '4');
+values('Pink + White', 4, 3, 4);
 
 INSERT INTO Songs (s_name,s_albumkey,s_genrekey,s_artistkey)
-values('Call Out My Name', '5', '3', '5');
+values('Call Out My Name', 5, 3, 5);
 
 INSERT INTO Songs (s_name,s_albumkey,s_genrekey,s_artistkey)
-values('StarBoy', '6', '3', '5');
+values('StarBoy', 6, 3, 5);
 
 INSERT INTO Songs (s_name,s_albumkey,s_genrekey,s_artistkey)
-values('Bad Blood', '7', '2', '6');
+values('Bad Blood', 7, 2, 6);
 
 INSERT INTO Songs (s_name,s_albumkey,s_genrekey,s_artistkey)
-values('Bangarang', '8', '4', '7');
+values('Bangarang', 8, 4, 7);
 
 INSERT INTO Songs (s_name,s_albumkey,s_genrekey,s_artistkey)
-values('Telephones', '9', '10', '8');
+values('Telephones', 9, 10, 8);
 
 INSERT INTO Songs (s_name,s_albumkey,s_genrekey,s_artistkey)
-values('Small Town Small', '10', '8', '9');
+values('Small Town Small', 10, 8, 9);
 
 INSERT INTO Songs (s_name,s_albumkey,s_genrekey,s_artistkey)
-values('Boys With Luv', '11', '5', '10');
+values('Boys With Luv', 1, 5, 10);
 
 INSERT INTO Songs (s_name,s_albumkey,s_genrekey,s_artistkey)
-values('Livin on a Prayer', '12', '7', '11');
+values('Livin on a Prayer', 12, 7, 11);
 
 INSERT INTO Songs (s_name,s_albumkey,s_genrekey,s_artistkey)
-values('Superstar', '13', '10', '12');
+values('Superstar', 13, 10, 12);
 
 
 
 INSERT INTO Albums (al_name,al_year)
-values('Curtain Call - Hits(Deluxe Version)', '2005');
+values('Curtain Call - Hits(Deluxe Version)', 2005);
 
 INSERT INTO Albums (al_name,al_year)
-values('AstroWorld', '2018');
+values('AstroWorld', 2018);
 
 INSERT INTO Albums (al_name,al_year)
-values('Back In Black', '1980');
+values('Back In Black', 1980);
 
 INSERT INTO Albums (al_name,al_year)
-values('Blonde', '2016');
+values('Blonde', 2016);
 
 INSERT INTO Albums (al_name,al_year)
-values('My Dear Melancholy', '2018');
+values('My Dear Melancholy', 2018);
 
 INSERT INTO Albums (al_name,al_year)
-values('Starboy', '2016');
+values('Starboy', 2016);
 
 INSERT INTO Albums (al_name,al_year)
-values('1989', '2014');
+values('1989', 2014);
 
 INSERT INTO Albums (al_name,al_year)
-values('Bangarang', '2011');
+values('Bangarang', 2011);
 
 INSERT INTO Albums (al_name,al_year)
-values('Changes', '2018');
+values('Changes', 2018);
 
 INSERT INTO Albums (al_name,al_year)
-values('MACON', '2021');
+values('MACON', 2021);
 
 INSERT INTO Albums (al_name,al_year)
-values('One Twice Melody', '2022');
+values('One Twice Melody', 2022);
 
 INSERT INTO Albums (al_name,al_year)
-values('Slippery When Wet', '1986');
+values('Slippery When Wet', 1986);
 
 INSERT INTO Albums (al_name,al_year)
-values('MAP OF THE SOUL', '2019');
+values('MAP OF THE SOUL', 2019);
 
 
 
@@ -248,117 +254,204 @@ values('TimCook', 'Apple');
 
 
 INSERT INTO Followers
-values('1', '2');
+values(1, 2);
 
 INSERT INTO Followers
-values('1', '10');
+values(1, 10);
 
 INSERT INTO Followers
-values('1', '6');
+values(1, 6);
 
 INSERT INTO Followers
-values('2', '1');
+values(2, 1);
 
 INSERT INTO Followers
-values('2', '10');
+values(2, 10);
 
 INSERT INTO Followers
-values('2', '8');
+values(2, 8);
 
 INSERT INTO Followers
-values('2', '6');
+values(2, 6);
 
 INSERT INTO Followers
-values('3', '4');
+values(3, 4);
 
 INSERT INTO Followers
-values('3', '1');
+values(3, 1);
 
 INSERT INTO Followers
-values('3', '6');
+values(3, 6);
 
 INSERT INTO Followers
-values('4', '1');
+values(4, 1);
 
 INSERT INTO Followers
-values('4', '3');
+values(4, 3);
 
 INSERT INTO Followers
-values('4', '6');
+values(4, 6);
 
 INSERT INTO Followers
-values('4', '8');
+values(4, 8);
 
 INSERT INTO Followers
-values('5', '7');
+values(5, 7);
 
 INSERT INTO Followers
-values('6', '1');
+values(6, 1);
 
 INSERT INTO Followers
-values('6', '4');
+values(6, 4);
 
 INSERT INTO Followers
-values('7', '2');
+values(7, 2);
 
 INSERT INTO Followers
-values('7', '5');
+values(7, 5);
 
 INSERT INTO Followers
-values('8', '2');
+values(8, 2);
 
 INSERT INTO Followers
-values('8', '3');
+values(8, 3);
 
 INSERT INTO Followers
-values('8', '4');
+values(8, 4);
 
 INSERT INTO Followers
-values('9', '5');
+values(9, 5);
 
 INSERT INTO Followers
-values('10', '1');
+values(10, 1);
 
 
 
-INSERT INTO Playlists
-values('1', '1', '1', '0');
+INSERT INTO FollowersArtists
+VALUES (1, 1);
 
-INSERT INTO Playlists
-values('2', '2', '6', '1');
+INSERT INTO FollowersArtists
+VALUES (1, 2);
 
-INSERT INTO Playlists
-values('3', '3', '3', '1');
+INSERT INTO FollowersArtists
+VALUES (1, 3);
 
-INSERT INTO Playlists
-values('4', '4', '2', '1');
+INSERT INTO FollowersArtists
+VALUES (2, 1);
 
-INSERT INTO Playlists
-values('5', '5', '4', '1');
+INSERT INTO FollowersArtists
+VALUES (3, 11);
 
-INSERT INTO Playlists
-values('6', '6', '5', '0');
+INSERT INTO FollowersArtists
+VALUES (3, 4);
 
-INSERT INTO Playlists
-values('7', '7', '7', '0');
+INSERT INTO FollowersArtists
+VALUES (4, 1);
 
-INSERT INTO Playlists
-values('8', '8', '8', '1');
+INSERT INTO FollowersArtists
+VALUES (5, 6);
 
-INSERT INTO Playlists
-values('9', '9', '10', '0');
+INSERT INTO FollowersArtists
+VALUES (6, 10);
 
-INSERT INTO Playlists
-values('10', '10', '9', '1');
+INSERT INTO FollowersArtists
+VALUES (7, 9);
+
+
+
+INSERT INTO Playlists (p_userkey, p_name, p_public)
+VALUES(1, "Vibezz", 0);
+
+INSERT INTO Playlists (p_userkey, p_name, p_public)
+VALUES(1, "Music", 0);
+
+INSERT INTO Playlists (p_userkey, p_name, p_public)
+VALUES(2, "Heat", 1);
+
+INSERT INTO Playlists (p_userkey, p_name, p_public)
+VALUES(3, "Chillin", 1);
+
+INSERT INTO Playlists (p_userkey, p_name, p_public)
+VALUES(4, "Only Bangerz", 1);
+
+INSERT INTO Playlists (p_userkey, p_name, p_public)
+VALUES(5, "My Playlist", 1);
+
+INSERT INTO Playlists (p_userkey, p_name, p_public)
+VALUES(6, "Feelz", 0);
+
+INSERT INTO Playlists (p_userkey, p_name, p_public)
+VALUES(7, "Down Atrocious", 0);
+
+INSERT INTO Playlists (p_userkey, p_name, p_public)
+VALUES(8, "Top Hits", 1);
+
+INSERT INTO Playlists (p_userkey, p_name, p_public)
+VALUES(9, "Lofi", 0);
+
+INSERT INTO Playlists (p_userkey, p_name, p_public)
+VALUES(10, "Slaps", 1);
+
+INSERT INTO PlaylistsSongs
+VALUES(1, 1);
+
+INSERT INTO PlaylistsSongs
+VALUES(2, 6);
+
+INSERT INTO PlaylistsSongs
+VALUES(3, 3);
+
+INSERT INTO PlaylistsSongs
+VALUES(4, 2);
+
+INSERT INTO PlaylistsSongs
+VALUES(6, 5);
+
+INSERT INTO PlaylistsSongs
+VALUES(7, 7);
+
+INSERT INTO PlaylistsSongs
+VALUES(8, 8);
+
+INSERT INTO PlaylistsSongs
+VALUES(9, 10);
+
+INSERT INTO PlaylistsSongs
+VALUES(10, 9);
+
+
 
 -- Create user
 INSERT INTO Users (u_username, u_password)
 VALUES('test_name', 'test_password');
+
+
+
+-- Delete user RyanS
+DELETE FROM PlaylistsSongs
+WHERE ps_pkey in (SELECT p_key FROM Users, Playlists WHERE u_key = p_userkey AND u_username = "RyanS");
+
+DELETE FROM Playlists
+WHERE p_userkey = (SELECT u_key FROM Users WHERE u_username = "RyanS");
+
+DELETE FROM Followers
+WHERE f_key = (SELECT u_key FROM Users WHERE u_username = "RyanS")
+OR f_userkey = (SELECT u_key FROM Users WHERE u_ussername = "RyanS");
+
+DELETE FROM FollowersArtists
+WHERE fa_key = (SELECT u_key FROM Users WHERE u_username = "RyanS");
+
+DELETE FROM Users
+WHERE u_username = "RyanS";
+
+
 
 -- Logging in
 SELECT *
 FROM Users
 WHERE u_username = 'RyanS'
     AND u_password = 'ILML';
+
+
 
 -- 
