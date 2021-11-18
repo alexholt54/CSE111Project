@@ -590,5 +590,12 @@ select new.p_key, ps_skey
 from Playlists new, PlaylistsSongs, Playlists copying
 where new.p_name = 'Slaps'
     and copying.p_key = ps_pkey
-    and copying.p_name = "Top Hits"
+    and copying.p_name = "Top Hits";
 
+
+
+-- Get names of playlists made by "RyanS"
+select p_name
+from Playlists, Users
+where u_key = p_userkey
+    and u_username = "RyanS";
