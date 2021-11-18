@@ -558,7 +558,7 @@ where p_name = 'Only Bangerz'
 -- Removing all songs with "Country" genre from "Vibezz"
 delete from PlaylistsSongs
 where ps_pkey = (select p_key from Playlists where p_name = "Vibezz")
-    and ps_skey in (select s_key from Songs, Genres where s_genrekey = g_key and g_name = "Country")
+    and ps_skey in (select s_key from Songs, Genres where s_genrekey = g_key and g_name = "Country");
 
 
 
