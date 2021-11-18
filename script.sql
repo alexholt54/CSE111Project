@@ -535,7 +535,7 @@ from Users followers, Users account, Followers
 where followers.u_key = Followers.f_key
     and account.u_key = Followers.f_userkey
     and followers.u_username = 'Santosh';
-    
+
 
 
 -- Getting all of User "JackBoy's" followed artists
@@ -574,13 +574,3 @@ from Playlists, Songs, Albums
 where p_name = 'Down Atrocious'
     and s_albumkey = al_key
     and al_name = '1989';
-
-
-
--- Copy all songs from "Top Hits" playlist into "Slaps" playlist
-insert into PlaylistsSongs
-select new.p_key, ps_skey
-from Playlists new, PlaylistsSongs, Playlists copying
-where new.p_name = 'Slaps'
-    and copying.p_key = ps_pkey
-    and copying.p_name = "Top Hits"
