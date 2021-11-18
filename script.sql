@@ -599,3 +599,12 @@ select p_name
 from Playlists, Users
 where u_key = p_userkey
     and u_username = "RyanS";
+
+--Get all the songs from a playlist 
+select s_name
+from Songs, Playlists, PlaylistsSongs
+where p_name = 'Heat'
+    and ps_pkey = p_key
+    and ps_skey = s_key;
+
+
