@@ -603,7 +603,7 @@ where u_key = p_userkey
 -- Get all the songs from a playlist 
 select s_name
 from Songs, Playlists, PlaylistsSongs
-where p_name = 'Feelz'
+where p_name = 'Only Bangerz'
     and ps_pkey = p_key
     and ps_skey = s_key;
 
