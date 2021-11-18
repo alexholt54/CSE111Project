@@ -528,12 +528,13 @@ where followers.u_key = Followers.f_key
     and account.u_username = 'Santosh';
 
 
+
 -- Getting who User "Santosh" is following
 select account.u_username
 from Users followers, Users account, Followers
 where followers.u_key = Followers.f_key
     and account.u_key = Followers.f_userkey
-    and Followers.u_username = 'Santosh';
+    and followers.u_username = 'Santosh';
 
 
 -- Getting all of User "JackBoy's" followed artists
