@@ -454,11 +454,11 @@ WHERE u_username = 'RyanS'
 
 
 
--- User AlexH follows TheLad
+-- User Immortal follows TimCook
 insert into Followers
 select user1.u_key, user2.u_key
 from Users user1, Users user2
-where user1.u_username = "AlexH"
+where user1.u_username = "Immortal"
     and user2.u_username = "TimCook";
 
 
