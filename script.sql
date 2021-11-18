@@ -535,3 +535,15 @@ from Users, FollowersArtists, Artists
 where u_key = fa_key
     and fa_artistkey = ar_key
     and u_username = "JackBoy";
+
+
+
+-- Adding all songs with "HipHop" genre to "Only Bangerz" playlist
+insert into PlaylistsSongs
+select p_key, s_key
+from Playlists, Songs, Genres
+where p_name = "Only Bangerz"
+    and s_genrekey = g_key
+    and g_name = "HipHop";
+
+-- Adding all songs by 
