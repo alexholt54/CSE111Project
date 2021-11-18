@@ -454,4 +454,40 @@ WHERE u_username = 'RyanS'
 
 
 
--- 
+-- User AlexH follows TheLad
+insert into Followers
+select user1.u_key, user2.u_key
+from Users user1, Users user2
+where user1.u_username = "AlexH"
+    and user2.u_username = "TheLad";
+
+
+
+-- User AlexH unfollows TheLad
+delete from Followers
+where f_key = (select u_key from Users where u_username = "AlexH")
+    and f_userkey = (select u_key from Users where u_username = "TheLad");
+
+
+
+-- User Muska follows Travis Scott
+insert into FollowersArtists
+select u_key, ar_key
+from users, Artists
+where u_username = "Muska"
+    and ar_name = "Travis Scott"
+
+
+
+-- User Muska unfollows Travis Scott
+delete from FollowersArtists
+where fa_key = (select u_key from Users where u_username = "Muska")
+    and fa_artistkey = (select ar_key from Artists where ar_name = "Travis Scott")
+
+
+
+-- User MasterChief creates public Halo playlist
+insert into Playlists (p_userkey, p_name, p_public)
+select u_key, "Halo", 1
+from Users
+where u_username = "MasterChief"
