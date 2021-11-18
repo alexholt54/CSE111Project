@@ -557,6 +557,13 @@ where p_name = 'Only Bangerz'
 
 
 
+-- Removing all songs with "Country" genre from "Vibezz"
+delete from PlaylistsSongs
+where p_key = (select p_key from Playlists where p_name = "Vibezz")
+    and s_key in (select s_key from Songs, Genres where s_genrekey = g_key and g_name = "Country")
+
+
+
 -- Adding all songs by "The Weeknd" to "Feelz" playlist
 insert into PlaylistsSongs
 select p_key, s_key
@@ -574,3 +581,14 @@ from Playlists, Songs, Albums
 where p_name = 'Down Atrocious'
     and s_albumkey = al_key
     and al_name = '1989';
+
+
+
+-- Copy all songs from "Top Hits" playlist into "Slaps" playlist
+insert into PlaylistsSongs
+select new.p_key, ps_skey
+from Playlists new, PlaylistsSongs, Playlists copying
+where new.p_name = 'Slaps'
+    and copying.p_key = ps_pkey
+    and copying.p_name = "Top Hits"
+
