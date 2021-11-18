@@ -518,12 +518,16 @@ where ps_pkey = (select p_key from Playlists where p_name = "Lofi");
 delete from Playlists
 where p_name = "Lofi";
 
+
+
 -- Getting all of User Santosh's followers
 select followers.u_username
 from Users followers, Users account, Followers
 where followers.u_key = Followers.f_key
     and account.u_key = Followers.f_userkey
     and account.u_username = "Santosh";
+
+
 
 -- Getting all of User JackBoy's followed artists
 select ar_name
