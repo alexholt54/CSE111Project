@@ -36,6 +36,15 @@ class Users(UserMixin, db.Model):
     def get_id(self):
         return self.id
 
+# Songs table
+class Songs(db.Model):
+    __tablename__ = "Songs"
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String, nullable = False)
+    albumkey = db.Column(db.Integer)
+    genrekey = db.Column(db.Integer, nullable = False)
+    artistkey = db.Column(db.Integer, nullable = False)
+
 # Runs app
 if __name__ == "__main__":
     db.create_all() # Only need this line if db not created
