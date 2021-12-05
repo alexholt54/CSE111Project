@@ -66,6 +66,12 @@ class Albums(db.Model):
     name = db.Column(db.String, nullable = False)
     year = db.Column(db.Integer, nullable = False)
 
+# Artists table
+class Artists(db.Model):
+    __tablename__ = "Artists"
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String, nullable = False)
+
 # Login
 @app.route("/", methods = ["GET", "POST"])
 def login():
