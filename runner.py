@@ -72,6 +72,12 @@ class Artists(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String, nullable = False)
 
+# Followers table
+class Followers(db.Model):
+    __tablename__ = "Followers"
+    user = db.Column(db.Integer, primary_key = True)
+    followed = db.Column(db.Integer, primary_key = True)
+
 # Login
 @app.route("/", methods = ["GET", "POST"])
 def login():
