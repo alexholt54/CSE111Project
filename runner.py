@@ -45,6 +45,7 @@ class Songs(db.Model):
     genrekey = db.Column(db.Integer, nullable = False)
     artistkey = db.Column(db.Integer, nullable = False)
 
+# Playlists table
 class Playlists(db.Model):
     __tablename__ = "Playlists"
     id = db.Column(db.Integer, primary_key = True)
@@ -61,14 +62,22 @@ def login():
         if user is None or not user.check_password(data['password']): 
             return (url_for('login'))[1:]
         login_user(user)
-        if user.acct_type == 0:
-            return url_for('student_view')[1:]
-        elif user.acct_type == 1:
-            return url_for('teacher_view')[1:]
+        if user.username == "admin":
+            return url_for("admin")[1:]
         else:
-            return url_for('admin')[1:]
+            return url_for("home")[1:]
     elif request.method == "GET":   
         return render_template('login.html')
+
+# Admin
+@app.route("/admin", methods = ["GET", "POST", "PUT", "DELETE"])
+def admin():
+    return "Admin"
+
+# Home
+@app.route("/home", methods = ["GET"])
+def home():
+    return "Home"
 
 # Runs app
 if __name__ == "__main__":
