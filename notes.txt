@@ -1,0 +1,9 @@
+login.html
+createUser.html
+admin.html
+home.html
+explore.html
+artist.html
+users.html
+playlist.html
+albums.html
