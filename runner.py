@@ -52,7 +52,25 @@ class Playlists(db.Model):
     name = db.Column(db.String, nullable = False)
     public = db.Column(db.Integer, nullable = False)
 
+# Login
+@app.route("/", methods = ["GET", "POST"])
+def login():
+    if request.method == "POST":
+        data = request.get_json()
+        user = Users.query.filter_by(username=data['username']).first() 
+        if user is None or not user.check_password(data['password']): 
+            return (url_for('login'))[1:]
+        login_user(user)
+        if user.acct_type == 0:
+            return url_for('student_view')[1:]
+        elif user.acct_type == 1:
+            return url_for('teacher_view')[1:]
+        else:
+            return url_for('admin')[1:]
+    else:   
+        return render_template('login.html')
+
 # Runs app
 if __name__ == "__main__":
-    db.create_all() # Only need this line if db not created
+    #db.create_all() # Only need this line if db not created
     app.run(debug=True)
