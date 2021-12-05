@@ -59,7 +59,12 @@ class Genres(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String, nullable = False)
 
-
+# Albums table
+class Albums(db.Model):
+    __tablename__ = "Albums"
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String, nullable = False)
+    year = db.Column(db.Integer, nullable = False)
 
 # Login
 @app.route("/", methods = ["GET", "POST"])
