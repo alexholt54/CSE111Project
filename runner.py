@@ -67,7 +67,7 @@ def login():
             return url_for('teacher_view')[1:]
         else:
             return url_for('admin')[1:]
-    else:   
+    elif request.method == "GET":   
         return render_template('login.html')
 
 # Runs app
