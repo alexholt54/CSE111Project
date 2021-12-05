@@ -53,6 +53,14 @@ class Playlists(db.Model):
     name = db.Column(db.String, nullable = False)
     public = db.Column(db.Integer, nullable = False)
 
+# Genres table
+class Genres(db.Model):
+    __tablename__ = "Genres"
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String, nullable = False)
+
+
+
 # Login
 @app.route("/", methods = ["GET", "POST"])
 def login():
