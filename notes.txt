@@ -7,3 +7,10 @@ artist.html
 users.html
 playlist.html
 albums.html
+
+These go in the <head> tags
+<link href="static/stylesheet.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+These goes right before </body>
+<script src="static/script.js"></script>
