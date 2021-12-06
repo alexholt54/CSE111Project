@@ -136,7 +136,35 @@ def admin():
 @app.route("/home")
 @login_required
 def home():
-    return render_template("home.html", user = current_user)
+    if request.method == "GET":
+        # Suggested followers
+
+        res = db.session.execute("""
+        select username
+        from Users, Followers
+        where id = followed
+            and id != :key
+            and user in (
+                select followed
+                from Followers
+                where user = :key
+            )
+            and followed not in (
+                select followed
+                from Followers
+                where user = :key
+            )
+        group by id
+        order by count(*)
+        limit 5;""", {"key" : current_user.id})
+
+        accounts = []
+
+        for row in res:
+            accounts.append(row[0])
+
+
+        return render_template("home.html", user = current_user, followers = accounts)
 
 # Runs app
 if __name__ == "__main__":

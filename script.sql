@@ -622,3 +622,22 @@ from Artists, FollowersArtists
 where ar_key = fa_artistkey
 group by ar_key
 order by followers desc;
+
+-- get suggested accounts to follow
+select id, username, count(*)
+from Users, Followers
+where id = followed
+    and id != 1
+    and user in (
+        select followed
+        from Followers
+        where user = 1
+    )
+    and followed not in (
+        select followed
+        from Followers
+        where user = 1
+    )
+group by id
+order by count(*)
+limit 5;
