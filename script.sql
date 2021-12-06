@@ -641,3 +641,58 @@ where id = followed
 group by id
 order by count(*)
 limit 5;
+
+-- get suggested artists to follow based on your followers
+select name
+from Artists, FollowersArtists
+where id = artistkey
+    and userkey != 1
+    and userkey in (
+        select followed
+        from Followers
+        where user = 1
+    )
+    and artistkey not in (
+        select artistkey
+        From FollowersArtists
+        where userkey = 1
+    )
+group by artistkey
+order by count(*) desc
+limit 5;
+
+-- get suggested artists based on your music
+select name
+from Artists, FollowersArtists
+where id = artistkey
+
+-- gets genres of music in your playlists
+select Genres.id, Genres.name
+from PlaylistsSongs, Songs, Genres, Playlists, Users
+where Users.id = 1
+    and songkey = Songs.id
+    and Songs.genrekey = Genres.id
+    and playlistkey = Playlists.id
+    and Playlists.userkey = Users.id
+
+-- gets artists based on genres in your playlist
+select Artists.name
+from Artists, Songs, Genres
+where Artists.id = Songs.artistkey
+    and Songs.genrekey = Genres.id
+    and Genres.id in (
+        select Genres.id
+        from PlaylistsSongs, Songs, Genres, Playlists, Users
+        where Users.id = 1
+            and songkey = Songs.id
+            and Songs.genrekey = Genres.id
+            and playlistkey = Playlists.id
+            and Playlists.userkey = Users.id
+    )
+    and Artists.id not in (
+        select artistkey
+        from FollowersArtists
+        where userkey = 1
+    )
+group by Artists.name, Genres.name
+order by count(*) desc

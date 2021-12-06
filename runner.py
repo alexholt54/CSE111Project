@@ -155,16 +155,40 @@ def home():
                 where user = :key
             )
         group by id
-        order by count(*)
+        order by count(*) desc
         limit 5;""", {"key" : current_user.id})
 
         accounts = []
-
         for row in res:
             accounts.append(row[0])
 
 
-        return render_template("home.html", user = current_user, followers = accounts)
+        res = db.session.execute("""
+        select Artists.name
+        from Artists, Songs, Genres
+        where Artists.id = Songs.artistkey
+            and Songs.genrekey = Genres.id
+            and Genres.id in (
+                select Genres.id
+                from PlaylistsSongs, Songs, Genres, Playlists, Users
+                where Users.id = :key
+                    and songkey = Songs.id
+                    and Songs.genrekey = Genres.id
+                    and playlistkey = Playlists.id
+                    and Playlists.userkey = Users.id
+            )
+            and Artists.id not in (
+                select artistkey
+                from FollowersArtists
+                where userkey = :key
+            )
+        group by Artists.name, Genres.name
+        order by count(*) desc""",{"key" : current_user.id} )
+        artists = []
+        for row in res:
+            artists.append(row[0])
+
+        return render_template("home.html", user = current_user, followers = accounts, artists = artists)
 
 # Runs app
 if __name__ == "__main__":

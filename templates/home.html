@@ -12,12 +12,22 @@
         <!-- Top songs -->
 
         <h1 class="center">{{user.username}}'s For You</h1>
-        <h2>Suggested followers:</h2>
+        <h2>You Might Know:</h2>
         <ul>
             {% if not followers %}
                 <li>No suggested followers</li>
             {% else %}
                 {% for row in followers %}
+                    <li>{{row}}</li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+        <h2>You Might Like:</h2>
+        <ul>
+            {% if not artists %}
+                <li>No suggested artists</li>
+            {% else %}
+                {% for row in artists %}
                     <li>{{row}}</li>
                 {% endfor %}
             {% endif %}
