@@ -6,7 +6,7 @@ explore.html
 artist.html
 users.html
 playlist.html
-albums.html
+album.html
 
 These go in the <head> tags
 <link href="static/stylesheet.css" rel="stylesheet">
