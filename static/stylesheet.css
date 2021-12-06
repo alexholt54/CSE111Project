@@ -2,6 +2,21 @@ body {
     background-color: lightblue;
 }
 
+button {
+    width: 100px;
+    padding: 5px 5px;
+    border-radius: 5px;
+    border: none;
+    margin: 10px;
+    background-color: snow;
+}
+
+input {
+    width: 150px;
+    height: 15px;
+    margin: 5px;
+}
+
 #username {
     text-align: center;
 }
@@ -12,5 +27,21 @@ body {
 
 .textbox {
     text-align: center;
+}
+
+.login {
+    background-position: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.createUser {
+    background-position: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 

@@ -89,7 +89,7 @@ class PlaylistsSongs(db.Model):
     playlistkey = db.Column(db.Integer, primary_key = True)
     songkey = db.Column(db.Integer, primary_key = True)
 
-# Login
+# Log In
 @app.route("/", methods = ["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -103,17 +103,33 @@ def login():
         else:
             return url_for("home")[1:]
     elif request.method == "GET":   
-        return render_template('login.html')
+        return render_template("login.html")
+
+# Log Out
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return url_for('login')[1:]
+
+@app.route("/newUser", methods = ["GET", "POST"])
+def createUser():
+    if request.method == "GET":
+        return render_template("createUser.html")
+    elif request.method == "POST":
+        return
 
 # Admin
 @app.route("/admin", methods = ["GET", "POST", "PUT", "DELETE"])
+@login_required
 def admin():
     return "Admin"
 
 # Home
 @app.route("/home", methods = ["GET"])
+@login_required
 def home():
-    return "Home"
+    return render_template("home.html", user = current_user)
 
 # Runs app
 if __name__ == "__main__":
