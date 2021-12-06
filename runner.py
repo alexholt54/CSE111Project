@@ -112,12 +112,19 @@ def logout():
     logout_user()
     return url_for('login')[1:]
 
+# Create new user
 @app.route("/newUser", methods = ["GET", "POST"])
 def createUser():
     if request.method == "GET":
         return render_template("createUser.html")
     elif request.method == "POST":
-        return
+        data = request.get_json()
+        user = Users.query.filter_by(username=data["username"]).first()
+        if user is None:
+            user = Users(data["username"], data["password"])
+            db.session.add(user)
+            db.session.commit()
+            return "success"
 
 # Admin
 @app.route("/admin", methods = ["GET", "POST", "PUT", "DELETE"])
