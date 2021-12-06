@@ -17,6 +17,13 @@ input {
     margin: 5px;
 }
 
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
 #username {
     text-align: center;
 }
