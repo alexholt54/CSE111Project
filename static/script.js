@@ -20,19 +20,8 @@ $("#login").on("click", function(){
 
 // When create user button on login page is clicked...
 $("#create").on("click", function(){
-    let username = $("#username").val();
-    let password = $("#password").val();
-    $.ajax({
-        url: "http://127.0.0.1:5000/newUser",
-        type: "GET",
-        success: function(response){
-            window.location.href = "http://127.0.0.1:5000/newUser"
-        }, 
-        error: function(status, error){
-            alert(error)
-        }
-    });
-});
+    window.location.href = "http://127.0.0.1:5000/newUser"
+})
 
 // When create user button is clicked on create user page...
 $("#createUser").on("click", function(){
@@ -69,5 +58,5 @@ function logout(){
 }
 
 function returnToLogin(){
-    window.location.href = "http://127.0.0.1:5000/"
+    window.location.href = "http://127.0.0.1:5000/";
 }
