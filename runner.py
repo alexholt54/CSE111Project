@@ -133,7 +133,7 @@ def admin():
     return "Admin"
 
 # Home
-@app.route("/home", methods = ["GET"])
+@app.route("/home")
 @login_required
 def home():
     return render_template("home.html", user = current_user)
