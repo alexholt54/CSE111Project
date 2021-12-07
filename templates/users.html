@@ -9,12 +9,64 @@
         <!-- Rest of code goes under here -->
         <!-- Show followed artists, followers, following, public playlists -->
         <!-- Follow or Unfollow -->
-        <h1 class="center">{{username}}</h1>
+        <h1 class="center">{{username}}'s User Page</h1>
+        <ul class = "upperLeft" type = "disc">
+            <h2 class = "center">Followers:</h2>
+            {% if not followers %}
+                <li>No followers :(</li>
+            {% else %}
+                {% for follower in followers %}
+                    <li><a href = "/user/{{follower}}">{{follower}}</a></li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+
+        <ul class = "bottomLeft" type = "disc">
+            <h2 class = "center">Following:</h2>
+            {% if not following %}
+                <li>Not following anyone :(</li>
+            {% else %}
+                {% for follower in following %}
+                    <li><a href = "/user/{{follower}}">{{follower}}</a></li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+
+        <ul class = "upperRight" type = "disc">
+            <h2 class = "center">Playlists:</h2>
+            {% if not playlists %}
+                <li>No playlists to show :(</li>
+            {% else %}
+                {% for playlist in playlists %}
+                    <li><a href = "/playlist/{{playlist}}">{{playlist}}</a></li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+
+        <ul class = "bottomRight" type = "disc">
+            <h2 class = "center">Followed Artists: </h2>
+            {% if not artists %}
+                <li>No followed artists :(</li>
+            {% else %}
+                {% for artist in artists %}
+                    <li><a href = "/artist/{{artist}}">{{artist}}</a></li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+
+        {% if isUser %}
+            <div class = "right">
+            <label for="playlistName">Playlist Name:</label><br>
+            <input type="text" class = "textbox" id="newPlaylist" name="newPlaylist" placeholder="Playlist"><br>
+            <button type="button" onclick="newPlaylist()">Create Playlist</button>
+            </div>
+        {% endif %}
 
 
 
 
-        
+        <button type="button" class="home" onclick="goHome()">Go Home</button>
+        <button type="button" class="exit" id="logout" onclick="logout()">Log Out</button>
         <script src="../static/script.js"></script>
     </body>
 </html>

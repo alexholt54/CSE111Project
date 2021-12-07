@@ -1,5 +1,5 @@
 # Import statements
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, templating
 from flask.helpers import url_for
 from flask_login import login_required, logout_user, login_user, current_user, LoginManager, UserMixin
 from flask_sqlalchemy import SQLAlchemy
@@ -361,8 +361,42 @@ def album(album_name):
 @app.route("/user/<username>")
 @login_required
 def userpage(username):
-    if request.method == "GET":
-        return render_template("users.html", username = username)
+    username = username.replace("%20", " ")
+    user = Users.query.filter_by(username = username).first()
+    isUser = False
+    if user is not None:
+        if user.id == current_user.id:
+            isUser = True
+        if request.method == "GET":
+            listFollowers = []
+            listFollowing = []
+            listPlaylists = []
+            listArtists = []
+            followers = Followers.query.filter_by(followed = user.id)
+            following = Followers.query.filter_by(user = user.id)
+            for follower in followers:
+                temp = Users.query.filter_by(id = follower.user).first()
+                listFollowers.append(temp.username)
+            for follower in following:
+                temp = Users.query.filter_by(id = follower.followed).first()
+                listFollowing.append(temp.username)
+
+            if (current_user.id == user.id):
+                playlists = Playlists.query.filter_by(userkey = user.id)
+                for playlist in playlists:
+                    listPlaylists.append(playlist.name)
+            else:
+                playlists = Playlists.query.filter_by(userkey = user.id, public = 1)
+                for playlist in playlists:
+                    listPlaylists.append(playlist.name)
+
+            followedArtists = FollowersArtists.query.filter_by(userkey = user.id)
+            for artist in followedArtists:
+                temp = Artists.query.filter_by(id = artist.artistkey).first()
+                listArtists.append(temp.name)
+
+            return render_template("users.html", username = username, isUser = isUser, followers = listFollowers,
+                                    following = listFollowing, playlists = listPlaylists, artists = listArtists)
 
 @app.route("/artist/<artistname>", methods = ["GET", "POST", "DELETE"])
 @login_required

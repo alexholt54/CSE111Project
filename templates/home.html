@@ -18,7 +18,7 @@
                 <li>No suggested followers :(</li>
             {% else %}
                 {% for row in followers %}
-                    <li>{{row}}</li>
+                    <li><a href = "/user/{{row}}">{{row}}</a></li>
                 {% endfor %}
             {% endif %}
         </ul>
@@ -44,7 +44,6 @@
                 {% endfor %}
             {% endif %}
         </ul>
-
 
         <!--icon library-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

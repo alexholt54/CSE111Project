@@ -106,7 +106,7 @@ br {
 .upperRight{
     position: absolute;
     top: 100;
-    right: 650px;
+    right: 735px;
 }
 
 .bottomLeft{
@@ -144,4 +144,13 @@ br {
     right: 550px;
     width: 300px;
     bottom: 0px;
+}
+
+.right {
+    float: right;
+    margin-top: 35px;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
