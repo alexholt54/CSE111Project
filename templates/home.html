@@ -12,8 +12,8 @@
         <!-- Top songs -->
 
         <h1 class="center">{{user.username}}'s For You</h1>
-        <h2>You Might Know:</h2>
-        <ul>
+        <ul class = "upperLeft" type = "disc">
+            <h2 class = "center">You Might Know: </h2>
             {% if not followers %}
                 <li>No suggested followers</li>
             {% else %}
@@ -22,8 +22,9 @@
                 {% endfor %}
             {% endif %}
         </ul>
-        <h2>You Might Like:</h2>
-        <ul>
+
+        <ul class = "upperRight" type = "disc">
+            <h2 class = "center">You Might Like: </h2>
             {% if not artists %}
                 <li>No suggested artists</li>
             {% else %}
@@ -32,8 +33,9 @@
                 {% endfor %}
             {% endif %}
         </ul>
-        <h2>Your Friends Like:</h2>
-        <ul>
+
+        <ul class = "bottomLeft" type = "disc">
+            <h2 class = "center">Your Friends Like: </h2>
             {% if not followerRecs %}
                 <li>No songs</li>
             {% else %}
@@ -44,8 +46,16 @@
         </ul>
 
 
+        <!--icon library-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <button type="button" class="logout" id="logout" onclick="logout()">Log Out</button>
+        <!-- The form -->
+        <form class = "search"> 
+        <input type="text" placeholder="Search.." name="search">
+        <button type="submit" onclick="search()"><i class="fa fa-search"></i></button>
+        </form>
+
+        <button type="button" class="exit" id="logout" onclick="logout()">Log Out</button>
         <script src="static/script.js"></script>
     </body>
 </html>
