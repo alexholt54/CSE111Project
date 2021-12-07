@@ -140,6 +140,22 @@ function followArtist(){
     });
 }
 
+function deletePlaylist() {
+    $.ajax({
+        url: window.location.href,
+        type: "DELETE",
+        data: JSON.stringify({"type" : "playlist"}),
+        contentType: "application/JSON",
+        success: function(response){
+            alert("Playlist Deleted!")
+            goHome()
+        }, 
+        error: function(status, error){
+            alert(error)
+        }
+    });
+}
+
 // When unfollow button is clicked...
 function unfollowArtist() {
     $.ajax({
@@ -154,3 +170,43 @@ function unfollowArtist() {
         }
     });
 }
+
+// When add song is clicked...
+$("#addSong").on("click", function(){
+    let song = $("#newSong").val();
+    if (song !== "") {
+        $.ajax({
+            url: window.location.href,
+            type: "POST",
+            data: JSON.stringify({"song" : song}),
+            contentType: "application/JSON",
+            success: function(response){
+                alert("Song Added!")
+                window.location.href = window.location.href
+            }, 
+            error: function(status, error){
+                alert(error)
+            }
+        });
+    }
+});
+
+// When delete song is clicked...
+$("#deleteSong").on("click", function(){
+    let song = $("#newSong").val();
+    if (song !== "") {
+        $.ajax({
+            url: window.location.href,
+            type: "DELETE",
+            data: JSON.stringify({"song" : song, "type" : "song"}),
+            contentType: "application/JSON",
+            success: function(response){
+                alert("Song Deleted!")
+                window.location.href = window.location.href
+            }, 
+            error: function(status, error){
+                alert(error)
+            }
+        });
+    }
+});

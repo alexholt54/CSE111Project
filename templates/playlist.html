@@ -11,6 +11,35 @@
         <!-- Add and Delete Songs From Playlist -->
         <!-- Make playlist public or private -->
         <!-- Delete playlist -->
+        <h1 class="center">{{playlist.name}}</h1>
+
+        <!-- all songs-->
+        <ul class = "upperLeft" type = "disc">
+            <h2 class = "center">Songs:</h2>
+            {% if not songs %}
+                <li>No songs in playlist :(</li>
+            {% else %}
+                {% for i in range(0, length) %}
+                    <li>{{songs[i]}} by {{artists[i]}}</li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+        <br>
+
+        {% if ownsPlaylist %}
+            <div class="centerDiv">
+                <form>
+                    <label for="newSong">Song Name:</label><br>
+                    <input type="text" class = "textbox" id="newSong" name="newSong" placeholder="Song Name"><br>
+                    <button type="button" id = "addSong">Add Song</button>
+                    <button type="button" id = "deleteSong">Delete Song</button>
+                </form>
+            </div>
+
+            <button type="button" class="delete" onclick="deletePlaylist()">Delete Playlist</button>
+        {% endif %}
+        <button type="button" class="home" onclick="goHome()">Go Home</button>
+        <button type="button" class="exit" id="logout" onclick="logout()">Log Out</button>
 
 
         

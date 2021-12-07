@@ -25,7 +25,7 @@
                 <li>No song</li>
             {% else %}
                 {% for song in songs %}
-                    <li><a href = "/song/{{song}}">{{song.name}}</a></li>
+                    <li>{{song.name}}</a></li>
                 {% endfor %}
             {% endif %}
         </ul>

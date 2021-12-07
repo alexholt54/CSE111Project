@@ -394,6 +394,54 @@ def artistpage(artistname):
             db.session.commit()
             return "success"
 
+@app.route("/playlist/<playlistname>", methods = ["GET", "POST", "DELETE"])
+@login_required
+def playlist(playlistname):
+    playlistname = playlistname.replace("%20", " ")
+    playlist = Playlists.query.filter_by(name = playlistname).first()
+    if playlist is not None:
+        if request.method == "GET":
+            ownsPlaylist = False
+            if playlist.userkey == current_user.id:
+                ownsPlaylist = True
+            if playlist.public == 1 or playlist.userkey == current_user.id:
+                songs = PlaylistsSongs.query.filter_by(playlistkey = playlist.id)
+                listSongs = []
+                listArtists = []
+                for song in songs:
+                    song = Songs.query.filter_by(id = song.songkey).first()
+                    if song is not None:
+                        artist = Artists.query.filter_by(id = song.artistkey).first()
+                        if artist is not None:
+                            listSongs.append(song.name)
+                            listArtists.append(artist.name)
+                return render_template("playlist.html", playlist = playlist, songs = listSongs, artists = listArtists, length = len(listSongs), 
+                                    ownsPlaylist = ownsPlaylist)
+        elif request.method == "POST":
+            data = request.get_json()
+            song = Songs.query.filter_by(name = data["song"]).first()
+            if song is not None:
+                newSong = PlaylistsSongs(playlist.id, song.id)
+                db.session.add(newSong)
+                db.session.commit()
+                return "success"
+        elif request.method == "DELETE":
+            data = request.get_json()
+            if data["type"] == "playlist":
+                songs = PlaylistsSongs.query.filter_by(playlistkey = playlist.id)
+                for song in songs:
+                    db.session.delete(song)
+                db.session.delete(playlist)
+                db.session.commit()
+                return "success"
+            elif data["type"] == "song":
+                data = request.get_json()
+                song = Songs.query.filter_by(name = data["song"]).first()
+                deleteSong = PlaylistsSongs.query.filter_by(playlistkey = playlist.id, songkey = song.id).first()
+                db.session.delete(deleteSong)
+                db.session.commit()
+                return "success"
+
 # Runs app
 if __name__ == "__main__":
     #db.create_all() # Only need this line if db not created
