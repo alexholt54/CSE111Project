@@ -92,3 +92,36 @@ tr:nth-child(even) {
 br {
     border: 3px solid black;
 }
+
+.search{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+.upperLeft{
+    position: absolute;
+}
+
+.upperRight{
+    position: absolute;
+    top: 100;
+    right: 650px;
+}
+
+.bottomLeft{
+    position: absolute;
+    top: 500px;
+}
+
+.bottomRight{
+    position: absolute;
+    right: 650px;
+    top: 500px;
+}
+
+.exit{
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+}
