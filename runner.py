@@ -342,6 +342,18 @@ def home():
 
         return render_template("home.html", user = current_user, followers = accounts, artists = artists, followerRecs = followerRecs)
 
+@app.route("/album/<album_name>")
+@login_required
+def album(album_name):
+    if request.method == "GET":
+        return render_template("album.html", albumName = album_name)
+
+@app.route("/user/<username>")
+@login_required
+def userpage(username):
+    if request.method == "GET":
+        return render_template("users.html", username = username)
+
 # Runs app
 if __name__ == "__main__":
     #db.create_all() # Only need this line if db not created

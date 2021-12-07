@@ -11,7 +11,7 @@
         <!-- Show suggested music based on followers and your music -->
         <!-- Top songs -->
 
-        <h1 class="center">{{user.username}}'s For You</h1>
+        <h1 class="center"><a href = "/user/{{user.username}}">{{user.username}}'s</a> For You</h1>
         <ul class = "upperLeft" type = "disc">
             <h2 class = "center">You Might Know: </h2>
             {% if not followers %}
