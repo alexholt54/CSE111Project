@@ -125,3 +125,16 @@ br {
     right: 0px;
     bottom: 0px;
 }
+
+.home {
+    position: absolute;
+    right: 125px;
+    bottom: 0px;
+}
+
+.follow {
+    position: absolute;
+    right: 550px;
+    bottom: 100px;
+    width: 300px;
+}

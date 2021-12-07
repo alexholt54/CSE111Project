@@ -41,10 +41,14 @@
                 {% endfor %}
             {% endif %}
         </ul>
+        
+        {% if following %}
+            <button type="button" id="unfollowArtist" class="follow" onclick="unfollowArtist()">Unfollow</button>
+        {% else %}
+            <button type="button" id="followArtist" class="follow" onclick="followArtist()">Follow</button>
+        {% endif %}
 
-        <button type="button" id="followArtist">Follow</button>
-        <button type="button" id="unfollowArtist">Unfollow</button>
-        <button type="button" onclick="goHome()">Go Home</button>
+        <button type="button" class="home" onclick="goHome()">Go Home</button>
         <button type="button" class="exit" id="logout" onclick="logout()">Log Out</button>
         <script src="../static/script.js"></script>
     </body>

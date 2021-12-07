@@ -265,7 +265,7 @@ def admin():
             return "success"
 
 # Home
-@app.route("/home")
+@app.route("/home", methods = ["GET", "POST"])
 @login_required
 def home():
     if request.method == "GET":
@@ -341,6 +341,8 @@ def home():
             followerRecs.append(row[0])
 
         return render_template("home.html", user = current_user, followers = accounts, artists = artists, followerRecs = followerRecs)
+    elif request.method == "POST":
+        return "success"
 
 @app.route("/album/<album_name>")
 @login_required
@@ -354,12 +356,12 @@ def userpage(username):
     if request.method == "GET":
         return render_template("users.html", username = username)
 
-@app.route("/artist/<artistname>")
+@app.route("/artist/<artistname>", methods = ["GET", "POST", "DELETE"])
 @login_required
 def artistpage(artistname):
-    artistname = artistname.replace("%20", " ")
+    artist = artistname.replace("%20", " ")
+    artist = Artists.query.filter_by(name = artist).first()
     if request.method == "GET":
-        artist = Artists.query.filter_by(name = artistname).first()
         if artist is not None:
             numFollowers = 0
             res = FollowersArtists.query.filter_by(artistkey = artist.id)
@@ -372,10 +374,25 @@ def artistpage(artistname):
                 if album is not None:
                     if album.name not in albums:
                         albums.append(album.name)
-
-
+            following = False
+            follow = FollowersArtists.query.filter_by(userkey = current_user.id, artistkey = artist.id).first()
+            if follow is not None:
+                following = True
             return render_template("artist.html", artist = artist.name, numFollowers = numFollowers,
-                                songs = songs, albums = albums)
+                                songs = songs, albums = albums, following = following)
+    elif request.method == "POST":
+        follow = FollowersArtists.query.filter_by(userkey = current_user.id, artistkey = artist.id).first()
+        if follow is None:
+            newFollow = FollowersArtists(current_user.id, artist.id)
+            db.session.add(newFollow)
+            db.session.commit()
+            return "success"
+    elif request.method == "DELETE":
+        follow = FollowersArtists.query.filter_by(userkey = current_user.id, artistkey = artist.id).first()
+        if follow is not None:
+            db.session.delete(follow)
+            db.session.commit()
+            return "success"
 
 # Runs app
 if __name__ == "__main__":

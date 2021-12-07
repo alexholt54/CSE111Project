@@ -124,3 +124,33 @@ $("#deleteData").on("click", function(){
         }
     });
 });
+
+// When follow button is clicked...
+function followArtist(){
+    $.ajax({
+        url: window.location.href,
+        type: "POST",
+        success: function(response){
+            alert("Now Following Artist!")
+            window.location.href = window.location.href
+        }, 
+        error: function(status, error){
+            alert(error)
+        }
+    });
+}
+
+// When unfollow button is clicked...
+function unfollowArtist() {
+    $.ajax({
+        url: window.location.href,
+        type: "DELETE",
+        success: function(response){
+            alert("Unfollowed Artist!")
+            window.location.href = window.location.href
+        }, 
+        error: function(status, error){
+            alert(error)
+        }
+    });
+}
