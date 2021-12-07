@@ -354,6 +354,29 @@ def userpage(username):
     if request.method == "GET":
         return render_template("users.html", username = username)
 
+@app.route("/artist/<artistname>")
+@login_required
+def artistpage(artistname):
+    artistname = artistname.replace("%20", " ")
+    if request.method == "GET":
+        artist = Artists.query.filter_by(name = artistname).first()
+        if artist is not None:
+            numFollowers = 0
+            res = FollowersArtists.query.filter_by(artistkey = artist.id)
+            for row in res:
+                numFollowers = numFollowers + 1
+            songs = Songs.query.filter_by(artistkey = artist.id)
+            albums = []
+            for song in songs:
+                album = Albums.query.filter_by(id = song.albumkey).first()
+                if album is not None:
+                    if album.name not in albums:
+                        albums.append(album.name)
+
+
+            return render_template("artist.html", artist = artist.name, numFollowers = numFollowers,
+                                songs = songs, albums = albums)
+
 # Runs app
 if __name__ == "__main__":
     #db.create_all() # Only need this line if db not created

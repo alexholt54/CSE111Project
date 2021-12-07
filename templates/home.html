@@ -29,7 +29,7 @@
                 <li>No suggested artists</li>
             {% else %}
                 {% for row in artists %}
-                    <li>{{row}}</li>
+                    <li><a href = "/artist/{{row}}">{{row}}</a></li>
                 {% endfor %}
             {% endif %}
         </ul>

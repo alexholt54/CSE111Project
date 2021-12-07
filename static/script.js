@@ -61,6 +61,10 @@ function returnToLogin(){
     window.location.href = "http://127.0.0.1:5000/";
 }
 
+function goHome(){
+    window.location.href = "http://127.0.0.1:5000/home";
+}
+
 // When delete user is clicked...
 $("#deleteUser").on("click", function(){
     let username = $("#deleteUsername").val();

@@ -9,10 +9,43 @@
         <!-- Rest of code goes under here -->
         <!-- Show number of followers, songs, albums -->
         <!-- Follow or Unfollow artist -->
+        <h1 class="center">{{artist}}</h1>
+        {% if numFollowers == 0 %}
+                <h2 class = "center">No followers :(</h2>
+        {% elif numFollowers == 1 %}
+                <h2 class = "center">1 follower</h2>
+        {% else %}
+            <h2 class="center">{{numFollowers}} followers</h2>
+        {% endif %}
 
+        <!-- list of songs-->
+        <ul class = "upperLeft" type = "disc">
+            <h2 class = "center">Songs: </h2>
+            {% if not songs %}
+                <li>No song</li>
+            {% else %}
+                {% for song in songs %}
+                    <li><a href = "/song/{{song}}">{{song.name}}</a></li>
+                {% endfor %}
+            {% endif %}
+        </ul>
 
+        <!-- list of albums -->
+        <ul class = "upperRight" type = "disc">
+            <h2 class = "center">Albums:</h2>
+            {% if not albums %}
+                <li>No albums</li>
+            {% else %}
+                {% for album in albums %}
+                    <li><a href = "/album/{{album}}">{{album}}</a></li>
+                {% endfor %}
+            {% endif %}
+        </ul>
 
-        
+        <button type="button" id="followArtist">Follow</button>
+        <button type="button" id="unfollowArtist">Unfollow</button>
+        <button type="button" onclick="goHome()">Go Home</button>
+        <button type="button" class="exit" id="logout" onclick="logout()">Log Out</button>
         <script src="../static/script.js"></script>
     </body>
 </html>
