@@ -130,7 +130,32 @@ def createUser():
 @app.route("/admin", methods = ["GET", "POST", "PUT", "DELETE"])
 @login_required
 def admin():
-    return "Admin"
+    if request.method == "GET":
+        users = Users.query.all()
+        albums = Albums.query.all()
+        artists = Artists.query.all()
+        genres = Genres.query.all()
+        playlists = Playlists.query.all()
+        usernames_playlists = []
+        for row in playlists:
+            user = Users.query.filter_by(id = row.userkey).first()
+            usernames_playlists.append(user.username)
+        songs = Songs.query.all()
+
+        song_albums = []
+        song_genres = []
+        song_artists = []
+        for row in songs:
+            album = Albums.query.filter_by(id = row.albumkey).first()
+            genre = Genres.query.filter_by(id = row.genrekey).first()
+            artist = Artists.query.filter_by(id = row.artistkey).first()
+            song_albums.append(album.name)
+            song_genres.append(genre.name)
+            song_artists.append(artist.name)
+
+        return render_template("admin.html", users = users, artists = artists, 
+        genres = genres, playlists = playlists, usernames_playlists = usernames_playlists, 
+        songs = songs, song_albums = song_albums, song_genres = song_genres, song_artists = song_artists)
 
 # Home
 @app.route("/home")

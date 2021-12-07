@@ -5,9 +5,116 @@
         <link href="static/stylesheet.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
-    <body>
+    <body class = "admin">
         <!-- Rest of code goes under here -->
-
+        <h1 class = "center">Admin Page</h1>
+        <div class = "row">
+            <div class = "column">
+                <table id = "usersTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Password</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{user.id}}</td>
+                            <td>{{user.username}}</td>
+                            <td>{{user.password}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class = "column">
+                <table id = "playlistsTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Userkey</th>
+                            <th>Playlist Name</th>
+                            <th>Public</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for playlist in playlists %}
+                        <tr>
+                            <td>{{playlist.id}}</td>
+                            <td>{{usernames_playlists[loop.index - 1]}}</td>
+                            <td>{{playlist.name}}</td>
+                            <td>{{playlist.public}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+        <div class = "row">
+            <div class = "column">
+                <table id = "songsTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Song Name</th>
+                            <th>Album Name</th>
+                            <th>Genre</th>
+                            <th>Artist</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for song in songs %}
+                        <tr>
+                            <td>{{song.id}}</td>
+                            <td>{{song.name}}</td>
+                            <td>{{song_albums[loop.index - 1]}}</td>
+                            <td>{{song_genres[loop.index - 1]}}</td>
+                            <td>{{song_artists[loop.index - 1]}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class = "column">
+                <table id = "artistsTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for artist in artists %}
+                        <tr>
+                            <td>{{artist.id}}</td>
+                            <td>{{artist.name}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class = "column">
+                <table id = "genresTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for genre in genres %}
+                        <tr>
+                            <td>{{genre.id}}</td>
+                            <td>{{genre.name}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
 
         
