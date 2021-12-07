@@ -32,6 +32,16 @@
                 {% endfor %}
             {% endif %}
         </ul>
+        <h2>Your Friends Like:</h2>
+        <ul>
+            {% if not followerRecs %}
+                <li>No songs</li>
+            {% else %}
+                {% for row in followerRecs %}
+                    <li>{{row}}</li>
+                {% endfor %}
+            {% endif %}
+        </ul>
 
 
 

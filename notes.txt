@@ -15,10 +15,3 @@ These go in the <head> tags
 These goes right before </body>
 <script src="static/script.js"></script>
 
-1 follows 2, 10, 6
-
-2 follows 8
-
-6 follows 4
-
-

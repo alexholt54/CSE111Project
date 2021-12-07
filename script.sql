@@ -696,3 +696,19 @@ where Artists.id = Songs.artistkey
     )
 group by Artists.name, Genres.name
 order by count(*) desc
+
+-- songs your friends listen to
+select Songs.name
+from Songs, PlaylistsSongs, Playlists
+where Playlists.public = 1
+    and Playlists.userkey != 1
+    and Playlists.id = playlistkey
+    and Songs.id = songkey
+    and Playlists.userkey in (
+        select followed
+        from Followers
+        where user = 1
+    )
+group by Songs.name
+order by count(*) desc
+limit 5;

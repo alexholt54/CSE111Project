@@ -183,12 +183,32 @@ def home():
                 where userkey = :key
             )
         group by Artists.name, Genres.name
-        order by count(*) desc""",{"key" : current_user.id} )
+        order by count(*) desc
+        limit 5;""",{"key" : current_user.id} )
         artists = []
         for row in res:
             artists.append(row[0])
 
-        return render_template("home.html", user = current_user, followers = accounts, artists = artists)
+        res = db.session.execute("""
+        select Songs.name
+        from Songs, PlaylistsSongs, Playlists
+        where Playlists.public = 1
+            and Playlists.userkey != :key
+            and Playlists.id = playlistkey
+            and Songs.id = songkey
+            and Playlists.userkey in (
+                select followed
+                from Followers
+                where user = :key
+                )
+            group by Songs.name
+            order by count(*) desc
+            limit 5;""", {"key" : current_user.id})
+        followerRecs = []
+        for row in res:
+            followerRecs.append(row[0])
+
+        return render_template("home.html", user = current_user, followers = accounts, artists = artists, followerRecs = followerRecs)
 
 # Runs app
 if __name__ == "__main__":
