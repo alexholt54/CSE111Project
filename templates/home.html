@@ -15,7 +15,7 @@
         <ul class = "upperLeft" type = "disc">
             <h2 class = "center">You Might Know: </h2>
             {% if not followers %}
-                <li>No suggested followers</li>
+                <li>No suggested followers :(</li>
             {% else %}
                 {% for row in followers %}
                     <li>{{row}}</li>
@@ -26,7 +26,7 @@
         <ul class = "upperRight" type = "disc">
             <h2 class = "center">You Might Like: </h2>
             {% if not artists %}
-                <li>No suggested artists</li>
+                <li>No suggested artists :(</li>
             {% else %}
                 {% for row in artists %}
                     <li><a href = "/artist/{{row}}">{{row}}</a></li>
@@ -37,7 +37,7 @@
         <ul class = "bottomLeft" type = "disc">
             <h2 class = "center">Your Friends Like: </h2>
             {% if not followerRecs %}
-                <li>No songs</li>
+                <li>No songs :(</li>
             {% else %}
                 {% for row in followerRecs %}
                     <li>{{row}}</li>

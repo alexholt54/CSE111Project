@@ -347,8 +347,16 @@ def home():
 @app.route("/album/<album_name>")
 @login_required
 def album(album_name):
-    if request.method == "GET":
-        return render_template("album.html", albumName = album_name)
+    album_name = album_name.replace("%20", " ")
+    album = Albums.query.filter_by(name = album_name).first()
+    if album is not None:
+        if request.method == "GET":
+            song = Songs.query.filter_by(albumkey = album.id).first()
+            if song is not None:
+                artist = Artists.query.filter_by(id = song.artistkey).first()
+                artist = artist.name
+                songs = Songs.query.filter_by(albumkey = album.id)
+                return render_template("album.html", albumName = album_name, artist = artist, songs = songs)
 
 @app.route("/user/<username>")
 @login_required

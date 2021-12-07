@@ -6,13 +6,22 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
-        <!-- Rest of code goes under here -->
         <!-- Show songs in the album -->
         <h1 class = "center">{{albumName}}</h1>
+        <h2 class = "center">Album by {{artist}}</h2>
+        <ul class type = "disc">
+            <h2>Songs:</h2>
+            {% if not songs %}
+                <li>No songs in album :(</li>
+            {% else %}
+                {% for song in songs%}
+                    <li>{{song.name}}</li>
+                {% endfor %}
+            {% endif %}
+        </ul>
 
-
-
-        
+        <button type="button" class="home" onclick="goHome()">Go Home</button>
+        <button type="button" class="exit" id="logout" onclick="logout()">Log Out</button>
         <script src="../static/script.js"></script>
     </body>
 </html>
