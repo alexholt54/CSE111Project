@@ -2,6 +2,11 @@ body {
     background-color: lightblue;
 }
 
+.logout {
+    margin:0 auto;
+    display:block;
+}
+
 button {
     width: 100px;
     padding: 5px 5px;
@@ -13,7 +18,7 @@ button {
 
 input {
     width: 150px;
-    height: 15px;
+    height: 20px;
     margin: 5px;
 }
 
@@ -36,7 +41,7 @@ img {
     text-align: center;
 }
 
-.login {
+.centerDiv {
     background-position: center;
     align-items: center;
     text-align: center;

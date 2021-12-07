@@ -60,3 +60,63 @@ function logout(){
 function returnToLogin(){
     window.location.href = "http://127.0.0.1:5000/";
 }
+
+// When delete user is clicked...
+$("#deleteUser").on("click", function(){
+    let username = $("#deleteUsername").val();
+    if (username !== "") {
+        $.ajax({
+            url: "http://127.0.0.1:5000/admin",
+            type: "DELETE",
+            data: JSON.stringify({"username" : username, "type" : "user"}),
+            contentType: "application/JSON",
+            success: function(response){
+                alert("Account Deleted!")
+            }, 
+            error: function(status, error){
+                alert(error)
+            }
+        });
+    }
+});
+
+// When admin adds data...
+$("#addData").on("click", function(){
+    let artist = $("#artistName").val();
+    let song = $("#songName").val();
+    let album = $("#albumName").val();
+    let genre = $("#genreName").val();
+    let year = $("#albumYear").val()
+    $.ajax({
+        url: "http://127.0.0.1:5000/admin",
+        type: "POST",
+        data: JSON.stringify({"artist" : artist, "song" : song, "album" : album, "genre" : genre, "year" : year, "type" : "data"}),
+        contentType: "application/JSON",
+        success: function(response){
+            alert("Data Added!")
+        }, 
+        error: function(status, error){
+            alert(error)
+        }
+    });
+});
+
+// When admin deletes data...
+$("#deleteData").on("click", function(){
+    let artist = $("#artistName").val();
+    let song = $("#songName").val();
+    let album = $("#albumName").val();
+    let genre = $("#genreName").val();
+    $.ajax({
+        url: "http://127.0.0.1:5000/admin",
+        type: "DELETE",
+        data: JSON.stringify({"artist" : artist, "song" : song, "album" : album, "genre" : genre, "type" : "data"}),
+        contentType: "application/JSON",
+        success: function(response){
+            alert("Data Deleted!")
+        }, 
+        error: function(status, error){
+            alert(error)
+        }
+    });
+});

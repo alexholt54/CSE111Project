@@ -8,6 +8,7 @@
     <body class = "admin">
         <!-- Rest of code goes under here -->
         <h1 class = "center">Admin Page</h1>
+        <h2 class = "center">All Data</h2>
         <div class = "row">
             <div class = "column">
                 <table id = "usersTable">
@@ -115,9 +116,34 @@
                 </table>
             </div>
         </div>
+        <h2 class = "center">Delete User</h2>
+        <div class="centerDiv">
+            <form>
+                <label for="username">Username:</label><br>
+                <input type="text" class = "textbox" id="deleteUsername" name="deleteUsername" placeholder="Username"><br>
+                <button type="button" id = "deleteUser">Delete User</button>
+            </form>
+        </div>
 
+        <h2 class = "center">Create or Delete Song/Album/Artist</h2>
+        <div class="centerDiv">
+            <form>
+                <label for="username">Artist Name:</label><br>
+                <input type="text" class = "textbox" id="artistName" name="artistName" placeholder="Arist's Name"><br>
+                <label for="username">Song Name:</label><br>
+                <input type="text" class = "textbox" id="songName" name="songName" placeholder="Song's Name"><br>
+                <label for="username">Genre:</label><br>
+                <input type="text" class = "textbox" id="genreName" name="genreName" placeholder="Genre"><br>
+                <label for="username">Album Name:</label><br>
+                <input type="text" class = "textbox" id="albumName" name="albumName" placeholder="Album's Name"><br>
+                <label for="username">Album Release Year:</label><br>
+                <input type="number" class = "textbox" id="albumYear" name="albumYear" placeholder="Album Year"><br>
+                <button type="button" id = "addData">Add</button>
+                <button type="button" id = "deleteData">Delete</button>
+            </form>
+        </div>
 
-        
+        <button type="button" class="logout" onclick="logout()">Log Out</button>
         <script src="static/script.js"></script>
     </body>
 </html>
