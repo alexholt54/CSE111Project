@@ -65,6 +65,25 @@ function goHome(){
     window.location.href = "http://127.0.0.1:5000/home";
 }
 
+function newPlaylist(){
+    let playlist = $("#newPlaylist").val();
+    if (playlist !== "") {
+        $.ajax({
+            url: window.location.href,
+            type: "POST",
+            data: JSON.stringify({"playlist" : playlist}),
+            contentType: "application/JSON",
+            success: function(response){
+                alert("Playlist Added!")
+                window.location.href = window.location.href
+            }, 
+            error: function(status, error){
+                alert(error)
+            }
+        });
+    }
+}
+
 // When delete user is clicked...
 $("#deleteUser").on("click", function(){
     let username = $("#deleteUsername").val();

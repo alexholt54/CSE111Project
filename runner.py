@@ -358,45 +358,52 @@ def album(album_name):
                 songs = Songs.query.filter_by(albumkey = album.id)
                 return render_template("album.html", albumName = album_name, artist = artist, songs = songs)
 
-@app.route("/user/<username>")
+@app.route("/user/<username>", methods = ["GET", "POST"])
 @login_required
 def userpage(username):
-    username = username.replace("%20", " ")
-    user = Users.query.filter_by(username = username).first()
-    isUser = False
-    if user is not None:
-        if user.id == current_user.id:
-            isUser = True
-        if request.method == "GET":
-            listFollowers = []
-            listFollowing = []
-            listPlaylists = []
-            listArtists = []
-            followers = Followers.query.filter_by(followed = user.id)
-            following = Followers.query.filter_by(user = user.id)
-            for follower in followers:
-                temp = Users.query.filter_by(id = follower.user).first()
-                listFollowers.append(temp.username)
-            for follower in following:
-                temp = Users.query.filter_by(id = follower.followed).first()
-                listFollowing.append(temp.username)
+    if request.method == "GET":
+        username = username.replace("%20", " ")
+        user = Users.query.filter_by(username = username).first()
+        isUser = False
+        if user is not None:
+            if user.id == current_user.id:
+                isUser = True
+            if request.method == "GET":
+                listFollowers = []
+                listFollowing = []
+                listPlaylists = []
+                listArtists = []
+                followers = Followers.query.filter_by(followed = user.id)
+                following = Followers.query.filter_by(user = user.id)
+                for follower in followers:
+                    temp = Users.query.filter_by(id = follower.user).first()
+                    listFollowers.append(temp.username)
+                for follower in following:
+                    temp = Users.query.filter_by(id = follower.followed).first()
+                    listFollowing.append(temp.username)
 
-            if (current_user.id == user.id):
-                playlists = Playlists.query.filter_by(userkey = user.id)
-                for playlist in playlists:
-                    listPlaylists.append(playlist.name)
-            else:
-                playlists = Playlists.query.filter_by(userkey = user.id, public = 1)
-                for playlist in playlists:
-                    listPlaylists.append(playlist.name)
+                if (current_user.id == user.id):
+                    playlists = Playlists.query.filter_by(userkey = user.id)
+                    for playlist in playlists:
+                        listPlaylists.append(playlist.name)
+                else:
+                    playlists = Playlists.query.filter_by(userkey = user.id, public = 1)
+                    for playlist in playlists:
+                        listPlaylists.append(playlist.name)
 
-            followedArtists = FollowersArtists.query.filter_by(userkey = user.id)
-            for artist in followedArtists:
-                temp = Artists.query.filter_by(id = artist.artistkey).first()
-                listArtists.append(temp.name)
+                followedArtists = FollowersArtists.query.filter_by(userkey = user.id)
+                for artist in followedArtists:
+                    temp = Artists.query.filter_by(id = artist.artistkey).first()
+                    listArtists.append(temp.name)
 
-            return render_template("users.html", username = username, isUser = isUser, followers = listFollowers,
-                                    following = listFollowing, playlists = listPlaylists, artists = listArtists)
+                return render_template("users.html", username = username, isUser = isUser, followers = listFollowers,
+                                        following = listFollowing, playlists = listPlaylists, artists = listArtists)
+    elif request.method == "POST":
+        data = request.get_json()
+        playlist = Playlists(current_user.id, data["playlist"], 0)
+        db.session.add(playlist)
+        db.session.commit()
+        return "success"
 
 @app.route("/artist/<artistname>", methods = ["GET", "POST", "DELETE"])
 @login_required
