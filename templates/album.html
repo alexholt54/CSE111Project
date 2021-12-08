@@ -9,6 +9,9 @@
         <!-- Show songs in the album -->
         <h1 class = "center">{{albumName}}</h1>
         <h2 class = "center">Album by {{artist}}</h2>
+        {% if year %}
+            <h3 class="center">Released in {{year}}</h3>
+        {% endif %}
         <ul class type = "disc">
             <h2>Songs:</h2>
             {% if not songs %}

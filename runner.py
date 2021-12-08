@@ -374,9 +374,9 @@ def home():
 def album(album_name):
     album_name = album_name.replace("%20", " ")
     album = Albums.query.filter_by(name = album_name).first()
-    year = album.year
     if album is not None:
         if request.method == "GET":
+            year = album.year
             song = Songs.query.filter_by(albumkey = album.id).first()
             if song is not None:
                 artist = Artists.query.filter_by(id = song.artistkey).first()
@@ -492,6 +492,9 @@ def playlist(playlistname):
     playlist = Playlists.query.filter_by(name = playlistname).first()
     if playlist is not None:
         if request.method == "GET":
+            user = Users.query.filter_by(id = playlist.userkey).first()
+            if user is not None:
+                user = user.username
             ownsPlaylist = False
             if playlist.userkey == current_user.id:
                 ownsPlaylist = True
@@ -507,7 +510,7 @@ def playlist(playlistname):
                             listSongs.append(song.name)
                             listArtists.append(artist.name)
                 return render_template("playlist.html", playlist = playlist, songs = listSongs, artists = listArtists, length = len(listSongs), 
-                                    ownsPlaylist = ownsPlaylist)
+                                    ownsPlaylist = ownsPlaylist, user = user)
         elif request.method == "POST":
             data = request.get_json()
             song = Songs.query.filter_by(name = data["song"]).first()

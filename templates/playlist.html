@@ -12,6 +12,11 @@
         <!-- Make playlist public or private -->
         <!-- Delete playlist -->
         <h1 class="center">{{playlist.name}}</h1>
+        {% if ownsPlaylist %}
+            <h2 class="center">Made by You</h2>
+        {% else %} 
+            <h2 class="center">Made by {{user}}</h2> 
+        {% endif %}      
 
         <!-- all songs-->
         <ul class = "upperLeft" type = "disc">
