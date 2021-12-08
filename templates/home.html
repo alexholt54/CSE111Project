@@ -45,6 +45,17 @@
             {% endif %}
         </ul>
 
+        <ul class = "bottomRight" type = "disc">
+            <h2 class = "center">Today's Top Songs: </h2>
+            {% if not topSongs %}
+                <li>No songs :(</li>
+            {% else %}
+                {% for song in topSongs %}
+                    <li>{{song}}</li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+
         <!--icon library-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 

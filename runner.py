@@ -339,8 +339,21 @@ def home():
         followerRecs = []
         for row in res:
             followerRecs.append(row[0])
+        
+        res = db.session.execute("""
+        select name, count(*) as TimesAdded
+        from Songs, PlaylistsSongs
+        where Songs.id = songkey
+        group by songkey
+        order by TimesAdded desc
+        limit 10;
+        """)
+        topSongs = []
+        for row in res:
+            topSongs.append(row[0])
 
-        return render_template("home.html", user = current_user, followers = accounts, artists = artists, followerRecs = followerRecs)
+        return render_template("home.html", user = current_user, followers = accounts, artists = artists, followerRecs = followerRecs,
+                                topSongs = topSongs)
     elif request.method == "POST":
         return "success"
 
