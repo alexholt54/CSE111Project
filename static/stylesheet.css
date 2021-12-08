@@ -154,3 +154,7 @@ br {
     display: flex;
     justify-content: center;
 }
+
+.searchButton {
+    background-image: url(https://cdn2.iconfinder.com/data/icons/clean-simple/75/search-512.png);
+}

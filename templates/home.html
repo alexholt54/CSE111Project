@@ -2,7 +2,7 @@
 <html lang = 'en'>
     <head>
         <title>Home</title>
-        <link href="static/stylesheet.css" rel="stylesheet">
+        <link href="../static/stylesheet.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
@@ -56,16 +56,14 @@
             {% endif %}
         </ul>
 
-        <!--icon library-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
         <!-- The form -->
-        <form class = "search"> 
-        <input type="text" placeholder="Search.." name="search">
-        <button type="submit" onclick="search()"><i class="fa fa-search"></i></button>
+        <form class="search"> 
+        <input type="text" id = "searchBar" placeholder="Search.." name="search">
+        <button type="button" id = "searchButton" onclick="searching()"><i class="fa fa-search"></i></button>
         </form>
 
         <button type="button" class="exit" id="logout" onclick="logout()">Log Out</button>
-        <script src="static/script.js"></script>
+        <script src="../static/script.js"></script>
     </body>
 </html>

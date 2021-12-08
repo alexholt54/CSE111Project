@@ -269,8 +269,6 @@ def admin():
 @login_required
 def home():
     if request.method == "GET":
-        # Suggested followers
-
         res = db.session.execute("""
         select username
         from Users, Followers
@@ -355,7 +353,21 @@ def home():
         return render_template("home.html", user = current_user, followers = accounts, artists = artists, followerRecs = followerRecs,
                                 topSongs = topSongs)
     elif request.method == "POST":
-        return "success"
+        data = request.get_json()
+        input = data["search"]
+        user = Users.query.filter_by(username = input).first()
+        artist = Artists.query.filter_by(name = input).first()
+        album = Albums.query.filter_by(name = input).first()
+        playlist = Playlists.query.filter_by(name = input).first()
+        input = input.replace(" ", "%20")
+        if user is not None:
+            return ("http://127.0.0.1:5000/user/" + input)
+        elif artist is not None:
+            return ("http://127.0.0.1:5000/artist/" + input)
+        elif album is not None:
+            return ("http://127.0.0.1:5000/album/" + input)
+        elif playlist is not None:
+            return ("http://127.0.0.1:5000/playlist/" + input)
 
 @app.route("/album/<album_name>")
 @login_required

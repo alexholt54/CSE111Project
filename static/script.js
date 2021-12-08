@@ -44,6 +44,25 @@ $("#createUser").on("click", function(){
     }
 });
 
+function searching(){
+    let search = $("#searchBar").val();
+    if (search !== "") {
+        $.ajax({
+            url: "http://127.0.0.1:5000/home",
+            type: "POST",
+            data: JSON.stringify({"search" : search}),
+            contentType: "application/JSON",
+            success: function(response){
+                window.location.href = response
+            }, 
+            error: function(status, error){
+                alert(error)
+            }
+        });
+    }
+
+}
+
 function logout(){
     $.ajax({
         url: "http://127.0.0.1:5000/logout",
