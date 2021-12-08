@@ -485,13 +485,16 @@ def artistpage(artistname):
             db.session.commit()
             return "success"
 
-@app.route("/playlist/<playlistname>", methods = ["GET", "POST", "DELETE"])
+@app.route("/playlist/<playlistname>", methods = ["GET", "POST", "PUT", "DELETE"])
 @login_required
 def playlist(playlistname):
     playlistname = playlistname.replace("%20", " ")
     playlist = Playlists.query.filter_by(name = playlistname).first()
+    isPublic = False
     if playlist is not None:
         if request.method == "GET":
+            if playlist.public == 1:
+                isPublic = True
             user = Users.query.filter_by(id = playlist.userkey).first()
             if user is not None:
                 user = user.username
@@ -510,7 +513,7 @@ def playlist(playlistname):
                             listSongs.append(song.name)
                             listArtists.append(artist.name)
                 return render_template("playlist.html", playlist = playlist, songs = listSongs, artists = listArtists, length = len(listSongs), 
-                                    ownsPlaylist = ownsPlaylist, user = user)
+                                    ownsPlaylist = ownsPlaylist, user = user, isPublic = isPublic)
         elif request.method == "POST":
             data = request.get_json()
             song = Songs.query.filter_by(name = data["song"]).first()
@@ -533,6 +536,16 @@ def playlist(playlistname):
                 song = Songs.query.filter_by(name = data["song"]).first()
                 deleteSong = PlaylistsSongs.query.filter_by(playlistkey = playlist.id, songkey = song.id).first()
                 db.session.delete(deleteSong)
+                db.session.commit()
+                return "success"
+        elif request.method == "PUT":
+            data = request.get_json()
+            if data["makePub"] == "yes":
+                playlist.public = 1
+                db.session.commit()
+                return "success"
+            elif data["makePub"] == "no":
+                playlist.public = 0
                 db.session.commit()
                 return "success"
 

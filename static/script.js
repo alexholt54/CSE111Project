@@ -63,6 +63,38 @@ function searching(){
 
 }
 
+function makePub() {
+    $.ajax({
+        url: window.location.href,
+        type: "PUT",
+        data: JSON.stringify({"makePub" : "yes"}),
+        contentType: "application/JSON",
+        success: function(response){
+            alert("Playlist Now Public!")
+            window.location.href = window.location.href
+        }, 
+        error: function(status, error){
+            alert(error)
+        }
+    });
+}
+
+function makePriv() {
+    $.ajax({
+        url: window.location.href,
+        type: "PUT",
+        data: JSON.stringify({"makePub" : "no"}),
+        contentType: "application/JSON",
+        success: function(response){
+            alert("Playlist Now Private!")
+            window.location.href = window.location.href
+        }, 
+        error: function(status, error){
+            alert(error)
+        }
+    });
+}
+
 function logout(){
     $.ajax({
         url: "http://127.0.0.1:5000/logout",

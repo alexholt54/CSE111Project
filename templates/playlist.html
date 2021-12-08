@@ -15,7 +15,7 @@
         {% if ownsPlaylist %}
             <h2 class="center">Made by You</h2>
         {% else %} 
-            <h2 class="center">Made by {{user}}</h2> 
+            <h2 class="center">Made by <a href = "/user/{{user}}">{{user}}</a></h2> 
         {% endif %}      
 
         <!-- all songs-->
@@ -25,7 +25,7 @@
                 <li>No songs in playlist :(</li>
             {% else %}
                 {% for i in range(0, length) %}
-                    <li>{{songs[i]}} by {{artists[i]}}</li>
+                    <li>{{songs[i]}} by <a href = "/artist/{{artists[i]}}">{{artists[i]}}</a></li>
                 {% endfor %}
             {% endif %}
         </ul>
@@ -37,6 +37,11 @@
                     <input type="text" class = "textbox" id="newSong" name="newSong" placeholder="Song Name"><br>
                     <button type="button" id = "addSong">Add Song</button>
                     <button type="button" id = "deleteSong">Delete Song</button>
+                    {% if isPublic %}
+                        <button type="button" onclick="makePriv()">Make Private</button>
+                    {% else %}
+                        <button type="button" onclick="makePub()">Make Public</button>
+                    {% endif %}
                 </form>
             </div>
 
