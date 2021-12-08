@@ -60,7 +60,14 @@
             <input type="text" class = "textbox" id="newPlaylist" name="newPlaylist" placeholder="Playlist"><br>
             <button type="button" onclick="newPlaylist()">Create Playlist</button>
             </div>
+        {% else %}
+            {% if isFollowing %}
+                <button type="button" class="follow" onclick="unfollowUser()">Unfollow</button>
+            {% else %}
+                <button type="button" class="follow" onclick="followUser()">Follow</button>
+            {% endif %}
         {% endif %}
+        
 
 
 

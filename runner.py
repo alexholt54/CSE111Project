@@ -371,16 +371,20 @@ def album(album_name):
                 songs = Songs.query.filter_by(albumkey = album.id)
                 return render_template("album.html", albumName = album_name, artist = artist, songs = songs)
 
-@app.route("/user/<username>", methods = ["GET", "POST"])
+@app.route("/user/<username>", methods = ["GET", "POST", "DELETE"])
 @login_required
 def userpage(username):
+    username = username.replace("%20", " ")
+    user = Users.query.filter_by(username = username).first()
     if request.method == "GET":
-        username = username.replace("%20", " ")
-        user = Users.query.filter_by(username = username).first()
         isUser = False
+        isFollowing = False
         if user is not None:
             if user.id == current_user.id:
                 isUser = True
+            following = Followers.query.filter_by(user = current_user.id, followed = user.id).first()
+            if following is not None:
+                isFollowing = True
             if request.method == "GET":
                 listFollowers = []
                 listFollowing = []
@@ -410,13 +414,25 @@ def userpage(username):
                     listArtists.append(temp.name)
 
                 return render_template("users.html", username = username, isUser = isUser, followers = listFollowers,
-                                        following = listFollowing, playlists = listPlaylists, artists = listArtists)
+                                        following = listFollowing, playlists = listPlaylists, artists = listArtists, isFollowing = isFollowing)
     elif request.method == "POST":
         data = request.get_json()
-        playlist = Playlists(current_user.id, data["playlist"], 0)
-        db.session.add(playlist)
-        db.session.commit()
-        return "success"
+        if data["type"] == "playlist":
+            playlist = Playlists(current_user.id, data["playlist"], 0)
+            db.session.add(playlist)
+            db.session.commit()
+            return "success"
+        elif data["type"] == "follow":
+            follow = Followers(current_user.id, user.id)
+            db.session.add(follow)
+            db.session.commit()
+            return "success"
+    elif request.method == "DELETE":
+        follow = Followers.query.filter_by(user = current_user.id, followed = user.id).first()
+        if follow is not None:
+            db.session.delete(follow)
+            db.session.commit()
+            return "success"
 
 @app.route("/artist/<artistname>", methods = ["GET", "POST", "DELETE"])
 @login_required

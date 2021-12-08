@@ -71,7 +71,7 @@ function newPlaylist(){
         $.ajax({
             url: window.location.href,
             type: "POST",
-            data: JSON.stringify({"playlist" : playlist}),
+            data: JSON.stringify({"playlist" : playlist, "type" : "playlist"}),
             contentType: "application/JSON",
             success: function(response){
                 alert("Playlist Added!")
@@ -82,6 +82,36 @@ function newPlaylist(){
             }
         });
     }
+}
+
+function followUser(){
+    $.ajax({
+        url: window.location.href,
+        type: "POST",
+        data: JSON.stringify({"type" : "follow"}),
+        contentType: "application/JSON",
+        success: function(response){
+            alert("Now Following User!")
+            window.location.href = window.location.href
+        }, 
+        error: function(status, error){
+            alert(error)
+        }
+    });
+}
+
+function unfollowUser(){
+    $.ajax({
+        url: window.location.href,
+        type: "DELETE",
+        success: function(response){
+            alert("Unfollowed User!")
+            window.location.href = window.location.href
+        }, 
+        error: function(status, error){
+            alert(error)
+        }
+    });
 }
 
 // When delete user is clicked...
